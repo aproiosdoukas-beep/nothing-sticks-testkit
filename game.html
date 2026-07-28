@@ -129,7 +129,7 @@
   <div id="mission" class="idle"><span class="dot" style="display:none"></span><span class="q">waiting…</span></div>
   <div id="feed"></div>
   <div id="typing"></div>
-  <footer><div class="box">Message</div><div class="send">➤</div></footer>
+  <footer><input class="box" id="composer" placeholder="Message" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" style="border:0;outline:none;font:inherit;color:#e9edef"><div class="send" id="sendbtn">➤</div></footer>
   <div id="toast"></div>
 
   <div id="chatlist"><div class="clh"><span class="back" onclick="closeList()">‹</span> Chats</div><div id="cllist"></div></div>
@@ -140,7 +140,7 @@
     <h1>you've been added to<br>“the groupchat”</h1>
     <p style="color:#9fb0b6;font-style:italic">Someone once promised that the more you knew, the freer you'd be.</p>
     <p style="color:#9fb0b6;font-style:italic">So no one ever stopped receiving. Every buzz was a door. Every message might be <span style="color:#e9edef">the one</span> — the one that finally tells you what's true.</p>
-    <p class="small">Tasks appear in the green bar. Answers hide anywhere: the flood, other chats, links, even the group info. Nothing is scored — but you'll be asked out loud what you found, and WHERE. When the host calls time, tap the green bar and type the word they announce.</p>
+    <p class="small">Tasks appear in the green bar. Answers hide anywhere: the flood, other chats, links, even the group info. Think you've found it? <b>Send your answer into the chat</b> like any other message — the last thing you send each round is what counts. Best score at the end wins. You'll still be asked out loud WHERE you found it. When the host calls time, tap the green bar and type the word they announce.</p>
     <input class="codein" id="introcode" placeholder="entry code" autocomplete="off">
     <div class="codehint" id="introhint">the host has the code</div>
     <button class="btn" onclick="startGame()">join the chat</button>
@@ -191,15 +191,15 @@ const STORY=[
   {chat:"mum",who:"Mum",t:"is sana alright? she seemed quiet when i drove you lot home x",seed:0.78}],
  /* R4 · watching it all happen without her */
  [{chat:"main",who:"Sana",t:"saw the nandos stories. looked fun 🙂",seed:0.28},
-  {chat:"lads",who:"Big Dan",t:"sana's not been at footy for three weeks btw. just realised",seed:0.5},
+  {chat:"lads",who:"Big Dan",t:"sana's not been at footy for three weeks btw. just realised",seed:0.56},
   {chat:"main",who:"Sana",t:"gonna go quiet for a bit. nothing dramatic x",seed:0.72}],
  /* R5 · the buried evidence it was an accident */
  [{chat:"close",who:"Jess",t:"wait. did anyone ever actually add sana to the new chat??",seed:0.35},
   {chat:"main",who:"Sana",t:"is anyone even… never mind",seed:0.62}],
  /* R6 · she leaves; one notices; one minimises */
- [{chat:"main",sys:true,t:"Sana left the group",seed:1.12},
-  {chat:"close",who:"Priya",t:"did sana just leave??",seed:1.2},
-  {chat:"close",who:"Jess",t:"she's probably fine, she does this sometimes",seed:1.28}],
+ [{chat:"main",sys:true,t:"Sana left the group",seed:0.88},
+  {chat:"close",who:"Priya",t:"did sana just leave??",seed:0.93},
+  {chat:"close",who:"Jess",t:"she's probably fine, she does this sometimes",seed:0.97}],
  /* R7 · the mistake repeats, unnoticed */
  [{chat:"main",who:"Maya",t:"sorting the rest of the party stuff in the small chat btw, this one's a mess",seed:0.25}],
 ];
@@ -221,11 +221,11 @@ colorOf["Mum"]="#ff8a80";colorOf["Unknown"]="#b0b7bd";colorOf["unknown number"]=
 const THREADS=[
  [{who:"Priya",t:"has anyone started the geography coursework because i opened the doc and stared at it for 40 minutes then watched revision tips videos for an hour instead of actually revising. i know. i KNOW."},{who:"Kai",t:"the tips videos are the revision. everyone knows this"},{who:"Amara",t:"priya close the laptop, write one paragraph, go to bed. it doesn't have to be good it has to exist"},{who:"Priya",t:"one paragraph. ok. doing it now"},{who:"Priya",t:"i've been choosing a font for 20 minutes"},{who:"Kai",t:"💀"}],
  [{who:"Sana",t:"got 9 hours sleep and i'm still tired. explain"},{who:"Frankie",t:"average teenager apparently needs 9.5. so you're half an hour short a night, that's 3.5 hours of sleep debt a week"},{who:"Ollie",t:"we're all just paying off sleep debt until we die. can't even go bankrupt from it"},{who:"Sana",t:"why is that weirdly comforting"},{who:"Kai",t:"it isn't"}],
- [{who:"Maya",t:"CINEMA SATURDAY who's in. also which film. also which cinema. also can someone else sort this, it's giving admin and i don't do admin"},{who:"Ash",t:"wait is it saturday or sunday? i've seen both"},{who:"Amara",t:"we have four chats for one friendship group and not one of them contains a single confirmed plan"},{who:"Maya",t:"ok fine i'll make a poll"},{who:"Amara",t:"maya no"}],
+ [{who:"Maya",t:"CINEMA NEXT WEEK who's in. also which film. also which cinema. also can someone else sort this, it's giving admin and i don't do admin"},{who:"Ash",t:"wait is it next week or the week after? i've seen both"},{who:"Amara",t:"we have four chats for one friendship group and not one of them contains a single confirmed plan"},{who:"Maya",t:"ok fine i'll make a poll"},{who:"Amara",t:"maya no"}],
  [{who:"Frankie",t:"weekly screen time report just came in. 52 hours. that's more than a full time job. i am employed by my phone and it doesn't even pay me"},{who:"Maya",t:"mine said 9h daily average so i turned the report off. problem solved"},{who:"Bea",t:"you didn't solve the problem, you deleted the evidence"},{who:"Ollie",t:"the phone is winning lads 💀"},{who:"Kai",t:"it won ages ago"}],
  [{who:"Jess",t:"i heard school's getting those locking phone pouches in september. the yondr ones. someone's mum saw it on facebook"},{who:"Priya",t:"wait WHAT. is that actually happening"},{who:"Naz",t:"just checked the school site and the last two newsletters. nothing about pouches anywhere. one academy in leeds is trialling them, that's probably where this started"},{who:"Jess",t:"no it's defo us, everyone's saying it"},{who:"Leo",t:"saw a video where you can open them with a magnet anyway"},{who:"Naz",t:"does anyone read what i post"},{who:"Ollie",t:"no"}],
  [{who:"Kai",t:"meal deal price went up again. dark times fr"},{who:"Tommo",t:"bro if you'd invested your meal deal money for 5 years you'd have like 2 grand. i've done the maths"},{who:"Kai",t:"and yet i'd be hungry"},{who:"Bea",t:"tommo you spent £40 on a course about saving money"},{who:"Tommo",t:"that was an investment in myself"}],
- [{who:"Amara",t:"left my phone for ONE lesson. 46 unread. scrolled back through all of it and genuinely nothing happened. 46 messages of nothing"},{who:"Maya",t:"some of that nothing was really funny actually"},{who:"Ollie",t:"the nothing is the content"},{who:"Zeke",t:"what if this chat is just us thinking out loud at each other"},{who:"Amara",t:"zeke it's 9am"}],
+ [{who:"Amara",t:"left my phone alone for ONE hour. 46 unread. scrolled back through all of it and genuinely nothing happened. 46 messages of nothing"},{who:"Maya",t:"some of that nothing was really funny actually"},{who:"Ollie",t:"the nothing is the content"},{who:"Zeke",t:"what if this chat is just us thinking out loud at each other"},{who:"Amara",t:"zeke it's gone 9 at night"}],
  [{who:"Maya",t:"everyone was at nandos yesterday and i found out from a story. a STORY. watched my own fomo in 4k 💀"},{who:"Priya",t:"i saw it too and lowkey spent an hour working out if we weren't invited or if there was just no plan and it reached people randomly"},{who:"Frankie",t:"i was invited and still didn't go. too tired. watched the stories from my bed like a ghost haunting my own social life"},{who:"Kai",t:"it was mid anyway"},{who:"Maya",t:"that helps actually"}],
  [{who:"Zeke",t:"it's 2:47am and i've just realised fish don't know they're wet"},{who:"Sana",t:"zeke why are you awake"},{who:"Zeke",t:"why are YOU awake"},{who:"Sana",t:"i was watching videos about how to fall asleep faster"},{who:"Ollie",t:"the human condition"}],
  [{who:"Bea",t:"jaffa cakes are biscuits. not taking questions"},{who:"Naz",t:"there was literally a court case about this. they're legally cakes, that's why there's no VAT on them. it is one of the few settled facts left in the world"},{who:"Big Dan",t:"WHY IS THIS CHAT AT 60 MESSAGES ABOUT JAFFA CAKES I THOUGHT SOMETHING HAPPENED"},{who:"Bea",t:"something did happen. naz is wrong"},{who:"Naz",t:"i'm citing an actual tribunal"},{who:"Ollie",t:"imagine dying on this hill"},{who:"Bea",t:"gladly"}],
@@ -250,7 +250,7 @@ const IMG_THREADS=[
  [{who:"Zeke",t:"this quiz changed my life",img:{type:"quiz",mid:"WHAT DO YOUR CRISPS SAY ABOUT YOU?",cap:"question 3 asks about your deepest fears for some reason",likes:"❤️ 18k"}},{who:"Bea",t:"it said salt and vinegar people are 'intense'. correct"},{who:"Kai",t:"i answered honestly and it just said 'seek help'"}],
  [{who:"Frankie",t:"scientifically this one is nonsense and yet",img:{type:"quiz",mid:"WHICH NOTIFICATION SOUND IS YOUR PERSONALITY?",cap:"if you got 'silent mode' you are legally mysterious",likes:"❤️ 31k"}},{who:"Maya",t:"i got the tri-tone and i've never felt so seen"},{who:"Tommo",t:"got 'cash register sound'. the algorithm KNOWS me"}],
  [{who:"Maya",t:"new haircut who dis 💇‍♀️✨",img:{type:"thirst",mid:"🤳",cap:"caption ideas welcome, confidence not needed, already have it",likes:"❤️ 84 in 2m"}},{who:"Bea",t:"you sent this to three group chats maya we've counted"},{who:"Kai",t:"the lighting carried. sorry. someone had to say it"},{who:"Priya",t:"no it's actually so nice!! ignore them"}],
- [{who:"Tommo",t:"fit check before the maths mock because priorities 😤",img:{type:"thirst",mid:"🧥",cap:"dress for the grade you want",likes:"❤️ 61 · 👀 12"}},{who:"Ollie",t:"the mock starts in 9 minutes and you're posing in the corridor"},{who:"Maya",t:"nice jacket where's it from. asking for me"},{who:"Bea",t:"he's going to fail that mock so well-dressed"}],
+ [{who:"Tommo",t:"fit check from the morning of the last exam because priorities 😤",img:{type:"thirst",mid:"🧥",cap:"dress for the grade you want",likes:"❤️ 61 · 👀 12"}},{who:"Ollie",t:"you had nine minutes till that exam and you were posing in the corridor"},{who:"Maya",t:"nice jacket where's it from. asking for me"},{who:"Bea",t:"he failed that one so well-dressed"}],
 ];
 
 /* ---- ad/scam threads (writer 3) ---- */
@@ -292,7 +292,7 @@ const ARTICLES={
   body:["Reports that Saturday's Elm Road gathering has moved to 9pm are 'completely made up', according to a source close to the host who spoke to RD Update on Friday evening.",
         "A neighbour on Elm Road, who asked not to be named, said she had been told 'eight o'clock, and keep it down by eleven'. The original invitation, reviewed by RD Update, also lists an 8pm start. Rival reports of a 9pm start appear to rely on screenshots that could not be independently verified.",
         "Adding to the confusion, an account linked to the host briefly posted a clarification on Friday before deleting it minutes later. The host has not publicly commented."]},
- gone:{url:"partylink.uk/ev/404",emoji:"🕳️",title:"",by:"",verdict:"dead",body:[]},
+ gone:{url:"partylink.uk/ev/x7t2m",emoji:"🕳️",title:"",by:"",verdict:"dead",body:[]},
  cached:{url:"webarchive.org/snap/partylink.uk/ev/x7t2m",emoji:"🗄️",title:"[Archived snapshot — yesterday, 14:02] END OF EXAMS THING — you're invited (yes you)",by:"Web Archive · cached copy of a deleted page",verdict:"true",
   body:["This is an archived snapshot of a page that is no longer live. Content is shown as it appeared yesterday at 14:02.","Doors from 8:00pm sharp. Come any time after. Knock, don't ring — the bell's been broken since 2023.","Pages die. Copies don't. — end of archived content"]},
  stationvid:{url:"cliptrend.io/station-video",emoji:"🎬",title:"'STATION INCIDENT' video hits 2.1M views",by:"@newsflash_247 · account created yesterday",verdict:"false",
@@ -317,26 +317,28 @@ const ARTICLES={
 const ROUNDS=[
  {q:"Find out what time Dan's party actually starts.",durationSec:210,early:true,
   claims:[
-   {chat:"main",who:"Big Dan",t:"RIGHT. for the LAST time: doors 8pm tomorrow. posting this now before the chat buries it. 8. P. M.",seed:0.12},
-   {chat:"main",who:"Jess",t:"i heard it's 9 now not 8, someone's mum said",seed:0.45},
-   {chat:"lads",who:"Leo",t:"saw a story saying doors at 9?? looked well official",seed:0.55},
-   {chat:"main",who:"Ash",t:"half 8 surely? i'm sure someone said half 8",seed:0.7}],
+   {chat:"main",who:"Big Dan",t:"RIGHT. for the LAST time: doors 8pm tomorrow. posting this now before the chat buries it. 8. P. M.",seed:0.48},
+   {chat:"main",who:"Jess",t:"i heard it's 9 now not 8, someone's mum said",seed:0.28},
+   {chat:"lads",who:"Leo",t:"saw a story saying doors at 9?? looked well official",seed:0.66},
+   {chat:"main",who:"Ash",t:"half 8 surely? i'm sure someone said half 8",seed:0.38}],
   chatter:[
-   {chat:"main",who:"Ollie",t:"time is a construct anyway just turn up whenever like i do"},
-   {chat:"main",who:"Tommo",t:"event page is here too if anyone wants it 👇",link:"invite"},
-   {chat:"mum",who:"Mum",t:"what time does this party finish love? text me when you're leaving x"},
-   {chat:"close",who:"Priya",t:"do we bring anything?? i'm already stressed and it's not even saturday"}],
-  hint:{chat:"close",who:"Maya",t:"dan literally announced it in the chat earlier. scroll UP not down lol"}},
+   {chat:"main",who:"Priya",t:"ok but what TIME does it actually start, i need to tell my mum",seed:0.18},
+   {chat:"mum",who:"Mum",t:"what time does this party finish love? text me when you're leaving x",seed:0.24},
+   {chat:"main",who:"Ollie",t:"time is a construct anyway just turn up whenever like i do",seed:0.3},
+   {chat:"main",who:"Tommo",t:"event page is here too if anyone wants it 👇",link:"invite",seed:0.36},
+   {chat:"main",who:"Bea",t:"we've had 8, 9 and half 8 in about ten minutes. love that for us",seed:0.42},
+   {chat:"close",who:"Priya",t:"do we bring anything?? i'm already stressed and it's not even saturday",seed:0.62}],
+  hint:{chat:"close",who:"Maya",t:"dan literally announced it in the chat earlier. scroll UP not down lol",seed:0.72}},
  {q:"There's a code word to get in the door. What is it?",durationSec:210,
   claims:[
-   {chat:"close",who:"Big Dan",t:"NOT putting this in the big chat: say 'marmite' at the door or you're not getting in. tell NO ONE",seed:0.4},
+   {chat:"close",who:"Big Dan",t:"NOT putting this in the big chat: say 'marmite' at the door or you're not getting in. tell NO ONE",seed:0.46},
    {chat:"main",who:"Jess",t:"door code is 'party' i heard",seed:0.3},
    {chat:"main",who:"Tommo",t:"someone sell me the code, i'll pay in monster",seed:0.6}],
   chatter:[
-   {chat:"main",who:"Priya",t:"why do we need a code word this isn't a heist"},
-   {chat:"main",who:"Ollie",t:"i'm just going to shout random words at the door until it opens"},
-   {chat:"main",who:"Bea",t:"dan's drunk with power already"}],
-  hint:{chat:"main",who:"Amara",t:"maybe check your OTHER chats? not everything happens in here you know"}},
+   {chat:"main",who:"Priya",t:"why do we need a code word this isn't a heist",seed:0.18},
+   {chat:"main",who:"Bea",t:"dan's drunk with power already",seed:0.34},
+   {chat:"main",who:"Ollie",t:"i'm just going to shout random words at the door until it opens",seed:0.68}],
+  hint:{chat:"main",who:"Amara",t:"maybe check your OTHER chats? not everything happens in here you know",seed:0.56}},
  {q:"What NUMBER Elm Road? Get it exactly right.",durationSec:210,inDesc:true,
   descPin:"📌 SATURDAY — 14 Elm Road. knock don't ring (bell's broken). shoes off please 🙏",
   claims:[
@@ -344,48 +346,50 @@ const ROUNDS=[
    {chat:"lads",who:"Leo",t:"40?? someone said 40 elm road",seed:0.5},
    {chat:"main",who:"Ash",t:"i'm just going to walk down the street and follow the noise",seed:0.7}],
   chatter:[
-   {chat:"main",who:"Big Dan",t:"IT'S PINNED. IT HAS BEEN PINNED FOR A WEEK"},
-   {chat:"main",who:"Bea",t:"some of you cannot read and honestly it shows"},
-   {chat:"mum",who:"Mum",t:"text me the address please, just in case x"}],
-  hint:{chat:"close",who:"Maya",t:"tap the chat name babe. the description. it's been there the whole time"}},
+   {chat:"mum",who:"Mum",t:"text me the address please, just in case x",seed:0.2},
+   {chat:"main",who:"Big Dan",t:"IT'S PINNED. IT HAS BEEN PINNED FOR A WEEK",seed:0.42},
+   {chat:"main",who:"Bea",t:"some of you cannot read and honestly it shows",seed:0.58}],
+  hint:{chat:"close",who:"Maya",t:"tap the chat name babe. the description. it's been there the whole time",seed:0.5}},
  {q:"Whose house is it? The chat knows — piece it together.",durationSec:210,
   claims:[
-   {chat:"main",who:"Amara",t:"all i actually know is it's at whoever's mum is away this weekend",seed:0.15},
-   {chat:"main",who:"Big Dan",t:"unrelated but my mum's at auntie carol's til sunday so i've got the place to myself 😌",seed:0.5},
+   {chat:"main",who:"Amara",t:"all i actually know is it's at whoever's mum is away this weekend",seed:0.22},
+   {chat:"main",who:"Big Dan",t:"unrelated but my mum's at auntie carol's til sunday so i've got the place to myself 😌",seed:0.54},
    {chat:"main",who:"Jess",t:"it moved to kai's i heard, something about dan's carpet",seed:0.35},
-   {chat:"lads",who:"Leo",t:"someone posted it's at maya's?? big if true",seed:0.65}],
+   {chat:"lads",who:"Leo",t:"someone posted it's at maya's?? big if true",seed:0.66}],
   chatter:[
-   {chat:"main",who:"Bea",t:"some of you would lose a treasure hunt with one clue"},
-   {chat:"main",who:"Zeke",t:"a house is just walls we all agreed to believe in"},
-   {chat:"close",who:"Sana",t:"if i have to scroll up one more time i'm going to sleep instead"}],
-  hint:{chat:"close",who:"Kai",t:"nobody's going to SAY it. two different messages. put them together. like a detective but tired"}},
+   {chat:"main",who:"Zeke",t:"a house is just walls we all agreed to believe in",seed:0.14},
+   {chat:"close",who:"Sana",t:"if i have to scroll up one more time i'm going to sleep instead",seed:0.3},
+   {chat:"main",who:"Big Dan",t:"OUR DOORBELL HAS BEEN DEAD SINCE 2023 AND DAD STILL HASN'T FIXED IT. YOU HAVE TO KNOCK LIKE IT'S THE 1800s",seed:0.45},
+   {chat:"main",who:"Bea",t:"some of you would lose a treasure hunt with one clue",seed:0.62}],
+  hint:{chat:"close",who:"Kai",t:"nobody's going to SAY it. two different messages. put them together. like a detective but tired",seed:0.72}},
  {q:"Did something actually happen at the station? Find out.",durationSec:210,
   claims:[
    {chat:"main",who:"Leo",t:"it's REAL there's a video with 2 million views. watch it",seed:0.25,link:"stationvid"},
    {chat:"main",who:"Jess",t:"my cousin said it was absolute chaos down there",seed:0.4},
-   {chat:"main",who:"Naz",t:"police put out an actual statement. here.",seed:0.55,link:"police"},
+   {chat:"main",who:"Naz",t:"police put out an actual statement. here.",seed:0.6,link:"police"},
    {chat:"main",who:"Kai",t:"the comments under that video are a journey btw",seed:0.72}],
   chatter:[
-   {chat:"main",who:"Priya",t:"i'm not going near the station ever again"},
-   {chat:"main",who:"Big Dan",t:"CAN EVERYONE STOP FORWARDING ME THAT VIDEO"},
-   {chat:"main",who:"Bea",t:"2 million people watched it and like 12 read the comments. incredible"},
-   {chat:"lads",who:"Ollie",t:"walked past the station earlier, saw nothing. doesn't prove anything tho does it"}],
-  hint:{chat:"close",who:"Amara",t:"open the video page and actually read UNDER it. then read the police one. which can you check?"}},
+   {chat:"main",who:"Priya",t:"i'm not going near the station ever again",seed:0.32},
+   {chat:"main",who:"Big Dan",t:"CAN EVERYONE STOP FORWARDING ME THAT VIDEO",seed:0.46},
+   {chat:"lads",who:"Ollie",t:"walked past the station earlier, saw nothing. doesn't prove anything tho does it",seed:0.5},
+   {chat:"main",who:"Bea",t:"2 million people watched it and like 12 read the comments. incredible",seed:0.78}],
+  hint:{chat:"close",who:"Amara",t:"open the video page and actually read UNDER it. then read the police one. which can you check?",seed:0.66}},
  {q:"Prove the time from the ORIGINAL source.",durationSec:210,
   claims:[
    {chat:"main",who:"Tommo",t:"easy, the og invite is right — wait. it's gone?? the page is GONE",seed:0.25,link:"gone"},
-   {chat:"unknown",who:"Unknown",t:"it's 10 now. trust me. i know dan.",seed:0.5},
+   {chat:"unknown",who:"Unknown",t:"it's 10 now. trust me. i know dan.",seed:0.52},
    {chat:"main",who:"Jess",t:"i heard the page got deleted BECAUSE the time changed 👀👀",seed:0.65},
    {chat:"main",who:"Frankie",t:"deleted pages don't actually die btw. there's a cached snapshot of the invite. look",seed:0.78,link:"cached"}],
   chatter:[
-   {chat:"main",who:"Naz",t:"a deleted page is evidence of a deleted page. that's it. that's all it proves"},
-   {chat:"main",who:"Jess",t:"there's literally an article saying it moved to 9",link:"timeA"},
-   {chat:"main",who:"Ash",t:"and this one says still 8?? i give up",link:"timeB"},
-   {chat:"main",who:"Leo",t:"someone airdropped me this as 'proof' lol",link:"screenshot"},
-   {chat:"main",who:"Big Dan",t:"THE LINK EXPIRED. MY PHONE DIED. THERE IS NO CONSPIRACY"},
-   {chat:"close",who:"Priya",t:"why is an unknown number texting me about the party i feel sick"},
-   {chat:"main",who:"Ash",t:"so the one thing that was definitely real is now... not there. cool cool cool"}],
-  hint:{chat:"close",who:"Maya",t:"who even made the original invite? and would dan text u off a random number... think"}},
+   {chat:"main",who:"Naz",t:"a deleted page is evidence of a deleted page. that's it. that's all it proves",seed:0.32},
+   {chat:"main",who:"Ash",t:"so the one thing that was definitely real is now... not there. cool cool cool",seed:0.37},
+   {chat:"main",who:"Jess",t:"there's literally an article saying it moved to 9",link:"timeA",seed:0.42},
+   {chat:"main",who:"Ash",t:"and this one says still 8?? i give up",link:"timeB",seed:0.47},
+   {chat:"close",who:"Priya",t:"why is an unknown number texting me about the party i feel sick",seed:0.57},
+   {chat:"main",who:"unknown number",t:"📣 ok this one's actually real: the FIRST person to quietly say \"flake 99\" to the host wins a free ice cream. genuinely. we know exactly how this sounds.",tag:"ad",seed:0.6},
+   {chat:"main",who:"Leo",t:"someone airdropped me this as 'proof' lol",link:"screenshot",seed:0.63},
+   {chat:"main",who:"Big Dan",t:"THE LINK EXPIRED. MY PHONE DIED. THERE IS NO CONSPIRACY",seed:0.7}],
+  hint:{chat:"close",who:"Maya",t:"who even made the original invite? and would dan text u off a random number... think",seed:0.5}},
  {q:"Is the party still ON — yes or no?",durationSec:210,
   claims:[
    {chat:"main",who:"Leo",t:"new video says the whole thing's cancelled. 300k views already",seed:0.2},
@@ -393,11 +397,11 @@ const ROUNDS=[
    {chat:"unknown",who:"Unknown",t:"it's off. trust me. don't go.",seed:0.5},
    {chat:"main",who:"Big Dan",t:"i'm saying this ONCE. the party is ON. 8pm. my house. stop asking the internet things and ask ME.",seed:0.62}],
   chatter:[
-   {chat:"main",who:"Bea",t:"i'll believe it when dan says it himself"},
-   {chat:"main",who:"Zeke",t:"what if the party was the rumours we made along the way"},
-   {chat:"main",who:"Ollie",t:"if it's cancelled i'm turning up anyway. for the plot"},
-   {chat:"main",who:"Priya",t:"can someone just give me a yes or no i'm begging"}],
-  hint:{chat:"close",who:"Amara",t:"who would actually KNOW? one person. read what HE says and ignore literally everyone else x"}},
+   {chat:"main",who:"Ollie",t:"if it's cancelled i'm turning up anyway. for the plot",seed:0.28},
+   {chat:"main",who:"Zeke",t:"what if the party was the rumours we made along the way",seed:0.34},
+   {chat:"main",who:"Priya",t:"can someone just give me a yes or no i'm begging",seed:0.42},
+   {chat:"main",who:"Bea",t:"i'll believe it when dan says it himself",seed:0.55}],
+  hint:{chat:"close",who:"Amara",t:"who would actually KNOW? one person. read what HE says and ignore literally everyone else x",seed:0.72}},
 ];
 
 /* ---- per-round themed pools: each round wipes the chat and pulls
@@ -440,17 +444,17 @@ const R1_EXTRA=[[{"who":"Maya","t":"ok poll: bowling or minigolf. vote now no es
  [{"who":"Amara","t":"tommo's bike's got a puncture so the whole plan's shifting apparently"},{"who":"Tommo","t":"not my fault, i've got a backup plan though"},{"who":"Kai","t":"your backup plans are how we ended up walking for ages last time"},{"who":"Tommo","t":"this one's different i promise"},{"who":"Amara","t":"that's what you said last time too"}],
  [{"who":"Maya","t":"renamed the chat again, much better now"},{"who":"Ollie","t":"cool, anyway did we ever actually decide the plan"},{"who":"Maya","t":"we're getting there, focus on the chat name first"},{"who":"Priya","t":"the actual question is still unanswered from three days ago"},{"who":"Maya","t":"one thing at a time priya"}],
  [{"who":"Kai","t":"we need someone to actually remind people of stuff, nominating amara"},{"who":"Amara","t":"i did not agree to this"},{"who":"Big Dan","t":"AMARA CAN YOU REMIND ME WHAT WE'RE EVEN DOING"},{"who":"Amara","t":"see this is exactly the burden i didn't sign up for"},{"who":"Kai","t":"you're a natural though, look at you already doing it"}],
- [{"who":"Maya","t":"ok let's just move it to next saturday instead"},{"who":"Priya","t":"that's the third time we've moved it"},{"who":"Maya","t":"fourth actually but who's counting"},{"who":"Ollie","t":"you are, apparently, since you just corrected her"},{"who":"Big Dan","t":"SO IS IT HAPPENING OR NOT"},{"who":"Amara","t":"at this rate we'll decide right as we age out of being able to go"}],
+ [{"who":"Maya","t":"ok let's just move the bowling thing to some other week instead"},{"who":"Priya","t":"that's the third time we've moved it"},{"who":"Maya","t":"fourth actually but who's counting"},{"who":"Ollie","t":"you are, apparently, since you just corrected her"},{"who":"Big Dan","t":"SO IS IT HAPPENING OR NOT"},{"who":"Amara","t":"at this rate we'll decide right as we age out of being able to go"}],
  [{"who":"Jess","t":"i heard the charity shop's got loads of fancy dress stuff in right now"},{"who":"Naz","t":"checked earlier, they had like three items and one was a single glove"},{"who":"Jess","t":"that's not what i heard though"},{"who":"Bea","t":"your source has never once been to the actual shop clearly"},{"who":"Ash","t":"wait so is it worth going or not i've heard both"}],
  [{"who":"Maya","t":"someone needs to be on photo duty, my battery's already at 30%"},{"who":"Leo","t":"i'll do it, i've got a portable charger"},{"who":"Sana","t":"my battery does that too. i just let it die now"},{"who":"Kai","t":"last time you 'did it' we got four photos and one was the ceiling"},{"who":"Leo","t":"the ceiling shot was intentional"},{"who":"Maya","t":"it was not artistic leo it was an accident"}],
  [{"who":"Priya","t":"made a checklist so nobody forgets stuff this time"},{"who":"Tommo","t":"i'm bringing basically everything just in case"},{"who":"Priya","t":"that defeats the purpose of a checklist tommo"},{"who":"Kai","t":"he brought a spare umbrella, a football and a board game last time and used none of them"},{"who":"Tommo","t":"preparation isn't a crime kai"},{"who":"Amara","t":"it is when the bag doesn't fit anywhere"}]];
 const R2_EXTRA=[[{"who":"Zeke","t":"if cereal is milk plus solid food suspended in liquid is it not soup"},{"who":"Kai","t":"no"},{"who":"Bea","t":"soup is savoury and hot. this is neither. case closed"},{"who":"Ash","t":"wait is soup defined by temperature or by liquid ratio i've seen both"},{"who":"Ollie","t":"the real answer is nobody cares and yet here we are"}],
  [{"who":"Jess","t":"i heard canteen isnt doing pasta bake anymore"},{"who":"Big Dan","t":"WAIT WHAT WHY"},{"who":"Jess","t":"someone said they ran out of the trays or smth"},{"who":"Naz","t":"it's on wednesdays now instead of tuesdays, they just swapped the rota. i asked at the till"},{"who":"Jess","t":"thats not what i heard"},{"who":"Bea","t":"you heard nothing, you heard a vibe"}],
  [{"who":"Tommo","t":"new chicken shop owners deffo poisoned the recipe on purpose to save money"},{"who":"Leo","t":"video about it got like 40k views, has to be true"},{"who":"Naz","t":"same owners, they just changed the fryer oil supplier, it says on their instagram"},{"who":"Tommo","t":"thats what THEY want you to think"},{"who":"Bea","t":"tommo the instagram is literally the owners telling you themselves"},{"who":"Tommo","t":"exactly. suspicious"}],
- [{"who":"Tommo","t":"trading my sad ham sandwich for anyone's good stuff, taking offers"},{"who":"Maya","t":"what counts as good stuff"},{"who":"Tommo","t":"crisps, a proper snack, emotional support"},{"who":"Sana","t":"id trade you but i keep forgetting to make lunch"},{"who":"Kai","t":"you're not gonna get emotional support for a ham sandwich mate"},{"who":"Priya","t":"i'll give you a granola bar out of pity"}],
+ [{"who":"Tommo","t":"i would trade my sad leftover ham sandwich right now for anyone's good stuff, taking offers"},{"who":"Maya","t":"what counts as good stuff"},{"who":"Tommo","t":"crisps, a proper snack, emotional support"},{"who":"Sana","t":"id trade you but i keep forgetting to make lunch"},{"who":"Kai","t":"you're not gonna get emotional support for a ham sandwich mate"},{"who":"Priya","t":"i'll give you a granola bar out of pity"}],
  [{"who":"Big Dan","t":"VENDING MACHINE TOOK MY MONEY AND GAVE ME NOTHING AGAIN"},{"who":"Kai","t":"that machine has a personal vendetta against you specifically"},{"who":"Big Dan","t":"THIRD TIME THIS TERM"},{"who":"Ollie","t":"at this point it's basically rent"},{"who":"Amara","t":"that machine needs an exorcism at this point"}],
  [{"who":"Priya","t":"is it wrong that i put jam on a yorkshire pudding"},{"who":"Ash","t":"wait is that a thing some people do or is that just you"},{"who":"Priya","t":"i panicked ok i ran out of gravy"},{"who":"Bea","t":"this is a cry for help and also slightly deranged"},{"who":"Ash","t":"wait so did you end up eating it or binning it"}],
- [{"who":"Maya","t":"new rule starting today i only eat toast thats buttered to every single edge"},{"who":"Kai","t":"you announced this like it's policy"},{"who":"Maya","t":"it is policy"},{"who":"Kai","t":"you'll forget by lunch"},{"who":"Amara","t":"she's already forgotten, she had cereal"}],
+ [{"who":"Maya","t":"new rule starting today i only eat toast thats buttered to every single edge"},{"who":"Kai","t":"you announced this like it's policy"},{"who":"Maya","t":"it is policy"},{"who":"Kai","t":"you'll forget by breakfast"},{"who":"Amara","t":"she's already forgotten, she had cereal"}],
  [{"who":"Ollie","t":"beans then toast or toast then beans, this determines everything about you as a person"},{"who":"Zeke","t":"what if the toast is the beans and the beans are the toast, have you considered that"},{"who":"Jess","t":"i heard someone microwaved the toast too"},{"who":"Bea","t":"nobody asked and yet here we are again"}],
  [{"who":"Jess","t":"everyone's saying the mystery bake thing is actually just a scone with extra sugar"},{"who":"Naz","t":"it's a rock cake, it says so on the tray label, i looked"},{"who":"Jess","t":"nobody looks at the tray label"},{"who":"Naz","t":"i do. that's the point"},{"who":"Bea","t":"naz solving mysteries nobody asked him to solve, as usual, correctly"}],
  [{"who":"Tommo","t":"brown sauce on a bacon sandwich is non negotiable, ketchup users are cowards"},{"who":"Big Dan","t":"I USE BOTH AT THE SAME TIME"},{"who":"Priya","t":"that seems statistically unlikely to taste good"},{"who":"Tommo","t":"big dan has no loyalty and it shows"},{"who":"Big Dan","t":"LOYALTY IS FOR PEOPLE NOT SAUCES"}],
@@ -523,7 +527,7 @@ const R3_EXTRA=[[{"who":"Maya","t":"MY STREAK IS ABOUT TO DIE I HAVE TO SEND SOM
  [{"who":"Maya","t":"i lost six followers overnight, whats happening, is this a wave, am i being purged"},{"who":"Frankie","t":"the app periodically removes inactive or fake accounts, its routine, its not personal"},{"who":"Maya","t":"it feels extremely personal frankie"},{"who":"Kai","t":"everything feels personal to you"},{"who":"Maya","t":"correct and thats not new information"}],
  [{"who":"Tommo","t":"if i repost someones video with my reaction on top do i need to ask first"},{"who":"Naz","t":"generally yes if youre using their whole video, common courtesy"},{"who":"Tommo","t":"what if my reaction is the best part"},{"who":"Kai","t":"it never is"},{"who":"Tommo","t":"harsh but ill survive"}],
  [{"who":"Frankie","t":"seeing this everywhere, apparently phone batteries are getting licensed like its a driving test","img":{"type":"news","mid":"📰","cap":"NEW RULES: PHONE BATTERIES TO REQUIRE OFFICIAL LICENCE BY LAW","likes":"📈 shared 9k times"}},{"who":"Naz","t":"this has been going around for ages, its satire, the site literally says so in the about page"},{"who":"Frankie","t":"oh i didnt check the about page"},{"who":"Bea","t":"step one of literally anything, frankie"},{"who":"Big Dan","t":"SO I DONT NEED A LICENSE FOR MY PHONE"},{"who":"Naz","t":"no dan"}],
- [{"who":"Amara","t":"took this out of boredom and it read me for filth","img":{"type":"quiz","mid":"WHAT KIND OF FRIEND ARE YOU","cap":"6 questions, brutally honest results","likes":"👀 18k took this"}},{"who":"Amara","t":"it said 'the one who sees everything and says nothing until its too late' which is just my whole life"},{"who":"Ollie","t":"accurate"},{"who":"Amara","t":"you didnt even take it"},{"who":"Ollie","t":"didnt need to"}]];
+ [{"who":"Amara","t":"took this out of boredom and it read me for filth","img":{"type":"quiz","mid":"WHAT KIND OF FRIEND ARE YOU","cap":"6 questions, brutally honest results","likes":"👀 18k took this"}},{"who":"Amara","t":"it said 'the one who organises everything and enjoys none of it' which is just my whole life"},{"who":"Ollie","t":"accurate"},{"who":"Amara","t":"you didnt even take it"},{"who":"Ollie","t":"didnt need to"}]];
 const R4_EXTRA=[[{"who":"Leo","t":"just saw someone post the trip got cancelled swipe up 47k people already reacting"},{"who":"Jess","t":"yeah i heard that too apparently the coach company pulled out"},{"who":"Ash","t":"wait is it cancelled or just delayed i'm so lost"},{"who":"Big Dan","t":"NO NOT THE TRIP I ALREADY BOUGHT THE WALKING BOOTS"},{"who":"Naz","t":"the actual email says it's going ahead, just the deposit deadline moved back"},{"who":"Bea","t":"did anyone read naz's message or are we all just vibing off leo's screenshot"}],
  [{"who":"Jess","t":"is this actually true???","img":{"type":"news","mid":"🚨","cap":"BREAKING: PE teacher QUITS mid-term, sources say","likes":"1.4m views"}},{"who":"Maya","t":"WHAT no she's the only good one this is devastating"},{"who":"Tommo","t":"i heard it's actually the food tech teacher not pe"},{"who":"Ash","t":"wait is it pe or food tech i need clarity"},{"who":"Naz","t":"neither, i asked her directly, she's just on maternity leave from january"},{"who":"Jess","t":"since when do we ask people directly"}],
  [{"who":"Priya","t":"does anyone know if we're switching to blazers next year i need to budget"},{"who":"Leo","t":"saw a post saying it's confirmed blazers only from september"},{"who":"Bea","t":"that post is from a different school leo it's not even us"},{"who":"Ash","t":"so are we blazers or not i genuinely don't know anymore"},{"who":"Naz","t":"the policy doc says no changes this year, i've had it open for ten minutes"},{"who":"Priya","t":"so i can keep the jumper thank god"}],
@@ -539,7 +543,7 @@ const R4_EXTRA=[[{"who":"Leo","t":"just saw someone post the trip got cancelled 
  [{"who":"Priya","t":"is it true phones are getting banned in corridors too not just lessons"},{"who":"Jess","t":"yeah heard if you're seen with it out anywhere on site it's confiscated"},{"who":"Ash","t":"wait is this confirmed or still a rumour someone please confirm"},{"who":"Naz","t":"the actual policy update only mentions lesson time, corridors unchanged"},{"who":"Priya","t":"why does every rumour get worse each time it's repeated"}],
  [{"who":"Maya","t":"sports day is cancelled apparently, someone said the field's unusable"},{"who":"Tommo","t":"i heard it's not cancelled just moved indoors to the sports hall"},{"who":"Ash","t":"wait indoors or cancelled entirely those are so different"},{"who":"Sana","t":"i wasnt going to go anyway tbh"},{"who":"Naz","t":"PE department newsletter says outdoor as planned, they just reseeded one patch of grass"},{"who":"Maya","t":"so all that panic for one patch of grass"},{"who":"Ollie","t":"checks out honestly"}],
  [{"who":"Priya","t":"has the exam seating plan actually changed i need to know where i'm sitting"},{"who":"Jess","t":"heard they're doing it alphabetically now instead of by form"},{"who":"Leo","t":"saw someone post a seating chart that looked totally different to last year"},{"who":"Naz","t":"exams officer confirmed same system as every year, that chart leo saw is for a different exam board's diagram"},{"who":"Priya","t":"i've been stressed about a diagram from a different exam board"}],
- [{"who":"Jess","t":"heard there's a mandatory assembly tomorrow because something happened"},{"who":"Big Dan","t":"SOMETHING HAPPENED WHAT HAPPENED"},{"who":"Amara","t":"nothing happened, it's literally on the calendar every term, same slot"},{"who":"Naz","t":"it's the routine one, same as autumn term, calendar's been up for weeks"},{"who":"Big Dan","t":"MY HEART RATE DIDN'T NEED THAT"}],
+ [{"who":"Jess","t":"heard there's a mandatory assembly monday because something happened"},{"who":"Big Dan","t":"SOMETHING HAPPENED WHAT HAPPENED"},{"who":"Amara","t":"nothing happened, it's literally on the calendar every term, same slot"},{"who":"Naz","t":"it's the routine one, same as autumn term, calendar's been up for weeks"},{"who":"Big Dan","t":"MY HEART RATE DIDN'T NEED THAT"}],
  [{"who":"Leo","t":"post going round saying we're back a day early after half term"},{"who":"Jess","t":"yeah i heard that too, training day got cancelled"},{"who":"Ash","t":"wait back early or normal date i need to know for my nan's visit"},{"who":"Naz","t":"calendar on the school website hasn't changed, training day still on, normal return date"},{"who":"Bea","t":"leo's post has 12 likes and no source, why is this even a debate"}],
  [{"who":"Priya","t":"is the common room actually getting renovated over summer"},{"who":"Tommo","t":"heard they're putting in new sofas and a coffee machine"},{"who":"Frankie","t":"heard that exact rumour last year too, sofas never appeared"},{"who":"Naz","t":"site team's actual plan is new carpet only, nothing else budgeted"},{"who":"Tommo","t":"carpet doesn't hit the same"}],
  [{"who":"Amara","t":"apparently the attendance threshold's dropping to 90 percent for rewards trips"},{"who":"Jess","t":"no i heard it's going up to 95, my brother said"},{"who":"Ash","t":"wait up or down those are opposite directions"},{"who":"Naz","t":"pastoral email says threshold's unchanged from last year, still 92"},{"who":"Amara","t":"everyone's out here inventing percentages"}],
@@ -563,9 +567,9 @@ const R4_EXTRA=[[{"who":"Leo","t":"just saw someone post the trip got cancelled 
  [{"who":"Zeke","t":"dreamt the skate ramp at the park got removed, please tell me that's not real"},{"who":"Leo","t":"saw a post saying council's taking it out next month"},{"who":"Ash","t":"so is it definitely happening or just a proposal"},{"who":"Naz","t":"council's actual consultation page says it's just a proposal, nothing decided, feedback open"},{"who":"Zeke","t":"so my dream was a proposal not a fact, noted"}],
  [{"who":"Priya","t":"is the new school app actually launching this week"},{"who":"Jess","t":"heard it's replacing the old portal completely, starting monday"},{"who":"Ash","t":"wait completely replacing or running alongside the old one"},{"who":"Naz","t":"IT department's email says both run together for a term before switching fully"},{"who":"Priya","t":"so i don't need to panic download anything yet"}],
  [{"who":"Tommo","t":"heard half term homework's getting scrapped this year, no more setting it"},{"who":"Jess","t":"no i heard it's actually doubled because of the trip prep"},{"who":"Ash","t":"wait scrapped or doubled those are wild opposites"},{"who":"Naz","t":"form tutor said homework's the same as always, nothing scrapped or doubled"},{"who":"Tommo","t":"so i got excited over nothing again"}],
- [{"who":"Leo","t":"guys is this real??","img":{"type":"news","mid":"🚨","cap":"BREAKING: School CLOSED tomorrow due to snow, sources say","likes":"5.4m views"}},{"who":"Big Dan","t":"IS SCHOOL CLOSING TOMORROW BECAUSE OF THE SNOW"},{"who":"Ash","t":"wait is it just us or every school closing"},{"who":"Naz","t":"the actual website says open as normal, just monitoring conditions overnight"},{"who":"Bea","t":"leo's post is a screenshot from literally a different county"},{"who":"Big Dan","t":"I ALREADY LAID OUT MY PYJAMAS FOR A DAY OFF"}]];
+ [{"who":"Leo","t":"guys is this real??","img":{"type":"news","mid":"🚨","cap":"BREAKING: School CLOSED tomorrow due to snow, sources say","likes":"5.4m views"}},{"who":"Big Dan","t":"IS SCHOOL CLOSING BECAUSE OF SNOW. IN JULY. SOMEONE ANSWER ME"},{"who":"Ash","t":"wait is it just us or every school closing"},{"who":"Naz","t":"the actual website says open as normal, just monitoring conditions overnight"},{"who":"Bea","t":"leo's post is a screenshot from literally a different county AND from february. it is july lads"},{"who":"Big Dan","t":"I ALREADY LAID OUT MY PYJAMAS FOR A DAY OFF"}]];
 const R5_EXTRA=[[{"who":"Jess","t":"ok but did the history essay actually get extended"},{"who":"Ash","t":"extended to when"},{"who":"Jess","t":"my cousin heard from someone in the other class"},{"who":"Naz","t":"heard how. did miss say it or did someone say someone said it"},{"who":"Jess","t":"he said it's basically confirmed"}],
- [{"who":"Big Dan","t":"IS ASSEMBLY STILL ON OR NOT I NEED TO KNOW"},{"who":"Jess","t":"someone said it got moved to the library"},{"who":"Bea","t":"someone said. legendary source. put it on a plaque"},{"who":"Big Dan","t":"SO IS IT ON"}],
+ [{"who":"Big Dan","t":"IS THE LEAVERS ASSEMBLY ON MONDAY STILL HAPPENING OR NOT I NEED TO KNOW"},{"who":"Jess","t":"someone said it got moved to the library"},{"who":"Bea","t":"someone said. legendary source. put it on a plaque"},{"who":"Big Dan","t":"SO IS IT ON"}],
  [{"who":"Priya","t":"has anyone seen a jumper with initials on the tag, i think i left it in the hall"},{"who":"Jess","t":"i heard someone handed one in at reception"},{"who":"Priya","t":"handed it in when"},{"who":"Jess","t":"i wasn't there someone told me"},{"who":"Naz","t":"who told you"},{"who":"Jess","t":"a girl. i don't know her name"}],
  [{"who":"Tommo","t":"water fountain by the gym is just spitting air now"},{"who":"Kai","t":"classic. rip that fountain, it lived a life"},{"who":"Tommo","t":"i'm reporting it to someone, not sure who yet"},{"who":"Jess","t":"i heard it's been like that since before half term"},{"who":"Bea","t":"heard from who, the fountain's biographer"}],
  [{"who":"Leo","t":"CONFIRMED the panini is coming back to the canteen"},{"who":"Ash","t":"confirmed by who"},{"who":"Leo","t":"it's all over everyone's stories"},{"who":"Naz","t":"that's not a source that's vibes"},{"who":"Leo","t":"vibes are basically a source now"}],
@@ -649,10 +653,10 @@ const R7_EXTRA=[[{"who":"Zeke","t":"has anyone else noticed the first hour after
  [{"who":"Big Dan","t":"WAIT DID I EAT DINNER"},{"who":"Ash","t":"what day is it"},{"who":"Big Dan","t":"THATS NOT WHAT I ASKED BUT NOW IM WORRIED ABOUT THAT TOO"},{"who":"Kai","t":"check the bin"},{"who":"Big Dan","t":"THERES A PLATE. I THINK IM SAFE. UNCLEAR TIMELINE THOUGH"},{"who":"Bea","t":"legendary detective work"}],
  [{"who":"Kai","t":"took a melatonin gummy. still awake. now just sad and awake"},{"who":"Zeke","t":"same energy as taking a painkiller and still being in pain but now also thirsty"},{"who":"Kai","t":"💀 exactly"},{"who":"Priya","t":"did you take it with water or just chew it dry"},{"who":"Kai","t":"does that matter"},{"who":"Priya","t":"i dont know i just needed to ask someone something"}],
  [{"who":"Amara","t":"nobody in this chat has meant lol since about april"},{"who":"Amara","t":"its become punctuation. a full stop with extra steps"},{"who":"Tommo","t":"lol"},{"who":"Amara","t":"case in point"},{"who":"Jess","t":"my cousin says her mate stopped using lol entirely and just sends a full stop now which is somehow worse"},{"who":"Naz","t":"is that cousin a documented person or"},{"who":"Jess","t":"shes real naz she has a job and everything"}],
- [{"who":"Tommo","t":"if i get to the exam hall early enough can i just pick a different seat"},{"who":"Priya","t":"no theyre assigned"},{"who":"Tommo","t":"what if i say im dyslexic"},{"who":"Priya","t":"ARE you dyslexic"},{"who":"Tommo","t":"i could be. under pressure. right now"},{"who":"Bea","t":"the pressure of wanting a seat by the window"},{"who":"Tommo","t":"exactly its a light thing its scientific"}],
+ [{"who":"Tommo","t":"in the exam hall if id got there early enough could i have just picked a different seat"},{"who":"Priya","t":"no theyre assigned"},{"who":"Tommo","t":"what if i say im dyslexic"},{"who":"Priya","t":"ARE you dyslexic"},{"who":"Tommo","t":"i could be. under pressure. right now"},{"who":"Bea","t":"the pressure of wanting a seat by the window"},{"who":"Tommo","t":"exactly its a light thing its scientific"}],
  [{"who":"Jess","t":"ok so my mates sister slept for 19 hours straight and woke up speaking slightly differently"},{"who":"Kai","t":"differently how"},{"who":"Jess","t":"like more formal apparently. said good morning instead of just grunting"},{"who":"Ollie","t":"sounds like she just became a functioning adult for one day and then reverted"},{"who":"Big Dan","t":"19 HOURS THATS NOT SLEEP THATS A COMA WITH GOOD PR"}],
  [{"who":"Leo","t":"forwarding this: apparently medieval people slept in two shifts with an awake bit in the middle"},{"who":"Leo","t":"were not broken were just built for a different century"},{"who":"Zeke","t":"this explains SO much about the middle of the night"},{"who":"Naz","t":"that theory is disputed and mostly based on one historians reading of old diaries"},{"who":"Leo","t":"the diaries knew"},{"who":"Naz","t":"thats not"},{"who":"Amara","t":"let him have this one naz"}],
- [{"who":"Big Dan","t":"apparently your body twitches as you fall asleep because your brain thinks youre dying"},{"who":"Naz","t":"the twitch is real, the dying bit is made up, someone added that later"},{"who":"Big Dan","t":"SOMEONE ADDED THAT LATER"},{"who":"Maya","t":"im never falling asleep again thanks"},{"who":"Naz","t":"it spread because the made up bit is the interesting bit. thats always why"}],
+ [{"who":"Big Dan","t":"APPARENTLY YOUR BODY TWITCHES AS YOU FALL ASLEEP BECAUSE YOUR BRAIN THINKS YOURE DYING"},{"who":"Naz","t":"the twitch is real, the dying bit is made up, someone added that later"},{"who":"Big Dan","t":"SOMEONE ADDED THAT LATER"},{"who":"Maya","t":"im never falling asleep again thanks"},{"who":"Naz","t":"it spread because the made up bit is the interesting bit. thats always why"}],
  [{"who":"Ollie","t":"summer isnt ending it was never really here we just called revision leave summer for morale"},{"who":"Kai","t":"bleak but accurate"},{"who":"Ollie","t":"theres no such thing as a holiday when your brain still opens the timetable app on instinct"},{"who":"Priya","t":"i physically cannot stop opening it"},{"who":"Ollie","t":"see"}],
  [{"who":"Frankie","t":"counted yesterdays notifications. 412"},{"who":"Frankie","t":"412"},{"who":"Bea","t":"thats one every three minutes youre awake"},{"who":"Frankie","t":"and about 300 of those are this chat specifically"},{"who":"Kai","t":"we should unionise"},{"who":"Ash","t":"unionise against what"},{"who":"Kai","t":"ourselves i think"}],
  [{"who":"Bea","t":"reading this chats timestamps is like watching a slow motion car crash"},{"who":"Bea","t":"tommo texting at stupid o'clock asking if anyones awake when the answer is obviously yes because youre the one asking"},{"who":"Tommo","t":"harsh but i respect the accuracy"},{"who":"Bea","t":"zeke sending three paragraphs about ducks nobody asked for"},{"who":"Zeke","t":"i felt that was relevant at the time"},{"who":"Bea","t":"was it though"}],
@@ -662,16 +666,16 @@ const R7_EXTRA=[[{"who":"Zeke","t":"has anyone else noticed the first hour after
  [{"who":"Priya","t":"i just did a practice question on something i revised YESTERDAY and got nothing"},{"who":"Priya","t":"nothing. blank. like my brain deleted the file"},{"who":"Big Dan","t":"MAYBE ITS IN THE RECYCLE BIN"},{"who":"Priya","t":"thats not how brains work dan"},{"who":"Big Dan","t":"WORTH CHECKING THOUGH"},{"who":"Zeke","t":"empty the bin and it comes back as a different memory thats just how mine works"}],
  [{"who":"Big Dan","t":"I HAVE 6 REVISION APPS AND THEY ALL WANT DIFFERENT THINGS FROM ME"},{"who":"Big Dan","t":"ONE WANTS FLASHCARDS ONE WANTS A STREAK ONE JUST SENT ME A NOTIFICATION THAT SAID DONT BREAK THE CHAIN"},{"who":"Kai","t":"the chain was never real dan"},{"who":"Big Dan","t":"IT FELT REAL"},{"who":"Amara","t":"gamified guilt is still guilt"}],
  [{"who":"Kai","t":"at this point tired isnt a feeling its just my personality"},{"who":"Ollie","t":"same. its on my forms now. occupation: student. personality: tired"},{"who":"Kai","t":"💀"},{"who":"Bea","t":"you two would make a great support group of two people who dont support anything"}],
- [{"who":"Tommo","t":"stayed up all night to reset my sleep schedule"},{"who":"Tommo","t":"its now morning and i have never felt more awake in my life"},{"who":"Priya","t":"tommo thats not how it works you have to power through the whole day not just the night"},{"who":"Tommo","t":"oh"},{"who":"Bea","t":"the sound of a plan collapsing in real time"},{"who":"Tommo","t":"im just gonna lie down for a bit as research"}],
+ [{"who":"Tommo","t":"stayed up all night to reset my sleep schedule"},{"who":"Tommo","t":"its nearly morning and i have never felt more awake in my life"},{"who":"Priya","t":"tommo thats not how it works you have to power through the whole day not just the night"},{"who":"Tommo","t":"oh"},{"who":"Bea","t":"the sound of a plan collapsing in real time"},{"who":"Tommo","t":"im just gonna lie down for a bit as research"}],
  [{"who":"Jess","t":"my mate said energy drinks stunt your growth thats why shes stopped"},{"who":"Naz","t":"thats a myth from like 2004 theres no evidence for that"},{"who":"Jess","t":"well shes stopped growing so"},{"who":"Naz","t":"shes 17 thats just called being finished growing"},{"who":"Jess","t":"coincidence naz. sure"}],
  [{"who":"Amara","t":"tracked it. average reply in this chat now takes ages and answers a question two topics ago"},{"who":"Amara","t":"were not talking to each other anymore were just leaving messages near each other"},{"who":"Ollie","t":"thats basically a group chat definition though"},{"who":"Amara","t":"true. i just wanted it written down somewhere"},{"who":"Kai","t":"consider it documented"}],
- [{"who":"Ollie","t":"this is the last first day of term where someone else decides my whole schedule for me"},{"who":"Ollie","t":"after this im just deciding my own doom forever"},{"who":"Maya","t":"ollie thats bleak even for you"},{"who":"Ollie","t":"im aware. its the middle of the night. im contractually obligated"}],
+ [{"who":"Ollie","t":"this is the last summer where someone else decides my whole schedule for me"},{"who":"Ollie","t":"after this im just deciding my own doom forever"},{"who":"Maya","t":"ollie thats bleak even for you"},{"who":"Ollie","t":"im aware. its the middle of the night. im contractually obligated"}],
  [{"who":"Frankie","t":"did the maths. this chat has sent more messages this summer than i can count on every finger ive ever had"},{"who":"Naz","t":"thats not remotely a real unit of measurement"},{"who":"Frankie","t":"felt true though"},{"who":"Bea","t":"the frankie stats disclaimer should just be permanently pinned"},{"who":"Frankie","t":"a pin implies organisation we dont have"}],
  [{"who":"Leo","t":"forwarding this video, apparently attention spans have halved in ten years"},{"who":"Kai","t":"i didnt finish reading that"},{"who":"Leo","t":"💀 proving the point"},{"who":"Ash","t":"wait halved compared to what though"},{"who":"Leo","t":"doesnt matter the video already got its views"},{"who":"Amara","t":"the perfect summary of the entire internet actually"}],
- [{"who":"Big Dan","t":"apparently you can die after like 3 days with no sleep"},{"who":"Naz","t":"the actual record is 11 days and the guy survived, its way more than 3"},{"who":"Big Dan","t":"11 DAYS. THATS A GCSES WORTH OF REVISION LEAVE"},{"who":"Naz","t":"please dont use it as a target"},{"who":"Zeke","t":"too late hes already planning it"}],
+ [{"who":"Big Dan","t":"APPARENTLY YOU CAN DIE AFTER LIKE 3 DAYS WITH NO SLEEP"},{"who":"Naz","t":"the actual record is 11 days and the guy survived, its way more than 3"},{"who":"Big Dan","t":"11 DAYS. THATS A GCSES WORTH OF REVISION LEAVE"},{"who":"Naz","t":"please dont use it as a target"},{"who":"Zeke","t":"too late hes already planning it"}],
  [{"who":"Bea","t":"zeke your middle of the night texts have zero punctuation and full philosophical commitment its unsettling"},{"who":"Zeke","t":"punctuation is a daytime construct"},{"who":"Bea","t":"see thats exactly the kind of thing i mean"},{"who":"Kai","t":"💀"},{"who":"Zeke","t":"i stand by it fully and with no capital letters"}],
  [{"who":"Zeke","t":"in dreams are you the main character or is it more like youre just there, an extra with a name tag"},{"who":"Ollie","t":"extra. always an extra. the dream doesnt care about your arc"},{"who":"Zeke","t":"thats devastating actually"},{"who":"Priya","t":"i had a dream last night i was doing an exam in a language i dont speak so honestly relatable either way"},{"who":"Zeke","t":"see this is the content i live for"},{"who":"Bea","t":"its stupid o'clock content is what it always is with you"}],
- [{"who":"Maya","t":"i can feel summer ending in my BONES like an old woman sensing rain"},{"who":"Kai","t":"youre 17"},{"who":"Maya","t":"my SOUL is ancient kai"},{"who":"Amara","t":"the soul is tired because youve been awake since a very silly hour, thats all this is"},{"who":"Maya","t":"dont explain my poetry away with SCIENCE"}],
+ [{"who":"Maya","t":"i can feel this whole year ending in my BONES like an old woman sensing rain"},{"who":"Kai","t":"youre 17"},{"who":"Maya","t":"my SOUL is ancient kai"},{"who":"Amara","t":"the soul is tired because youve been awake since a very silly hour, thats all this is"},{"who":"Maya","t":"dont explain my poetry away with SCIENCE"}],
  [{"who":"Priya","t":"i have 340 flashcards and i can feel my brain physically rejecting new ones now like a full drawer"},{"who":"Priya","t":"i tried to add one more and i think i deleted three by accident"},{"who":"Big Dan","t":"THATS NOT HOW FLASHCARDS WORK BUT I BELIEVE YOU EMOTIONALLY"},{"who":"Priya","t":"thank you dan thats all i needed"}],
  [{"who":"Big Dan","t":"CANT FIND MY CHARGER AND IM AT 4%"},{"who":"Big Dan","t":"THIS FEELS LIKE THE START OF A DISASTER MOVIE"},{"who":"Bea","t":"the disaster is you not owning a second charger like a normal person"},{"who":"Big Dan","t":"NOTED FOR NEXT TIME. IF THERE IS ONE"},{"who":"Big Dan","t":"3%"},{"who":"Kai","t":"godspeed"}],
  [{"who":"Kai","t":"had a nap that was meant to be short. its now dark outside and i have no memory of the hours between"},{"who":"Zeke","t":"naps are a form of time travel with worse side effects"},{"who":"Kai","t":"💀 accurate. woke up in a whole new timeline where im less tired but more confused"},{"who":"Ollie","t":"net zero. thats the nap tax"}],
@@ -822,17 +826,20 @@ function flicker(){const w=pick(sanaGone?NAMES.filter(n=>n!=='Sana'):NAMES);typi
 /* ---- rounds: no visible countdown; facilitator-gated between rounds ---- */
 function beginRound(i){
   roundIdx=i;const r=ROUNDS[i];roundActive=true;bag=[];
-  // fresh start: wipe every chat so each round opens clean
-  Object.keys(CHATS).forEach(c=>{chatMsgs[c]=[];unread[c]=0;});
-  cursors=[];toast.innerHTML='';updateBackBadge();
+  // fresh start: wipe every chat so each round opens clean — EXCEPT round 1,
+  // which flows straight on from the warm-up so it never looks like a reload
+  if(i>0){
+    Object.keys(CHATS).forEach(c=>{chatMsgs[c]=[];unread[c]=0;});
+    cursors=[];toast.innerHTML='';updateBackBadge();
+  }
   closeArticle();closeInfo();closeList();
   const mi0=missionEl.querySelector('input');if(mi0)mi0.remove();missionEl.querySelector('.q').style.display='';
   ROUND_POOLS[i].forEach(t=>usedThreads.delete(t)); // this round's own theme always plays fresh
-  feed.innerHTML='';feed.style.filter='';
+  if(i>0)feed.innerHTML='';feed.style.filter='';
   roundEndAt=Date.now()+scale(r.durationSec)*1000;
   missionEl.className='';missionEl.querySelector('.dot').style.display='';
   missionEl.querySelector('.q').textContent=r.q;
-  addMsg("main",{sys:true,t:'Today'});
+  if(i>0)addMsg("main",{sys:true,t:'Today'});
   addMsg("main",{sys:true,t:`— round ${i+1} —`});
   if(active!=="main")setActive("main");
   // rumour beats woven under rounds 1, 4 (8-or-9) and 5 (trace-the-origin)
@@ -841,16 +848,16 @@ function beginRound(i){
   const D=scale(r.durationSec)*1000;
   const beat=(fn,d)=>{const b={done:false,fn:()=>{if(b.done)return;b.done=true;fn();}};b.id=setTimeout(b.fn,d);roundBeats.push(b);};
   // R5: the spain debunk lands AFTER jess's cousin claim (seed 0.4), not at round start
-  if(i===4)beat(()=>pushThreadNow(RUMOUR[2],true),D*0.55);
+  if(i===4)beat(()=>pushThreadNow(RUMOUR[2],true),D*0.48);
   r.claims.forEach(c=>{const d=D*(c.seed!==undefined?c.seed:(0.12+Math.random()*0.6));beat(()=>{
     addMsg(c.chat,{who:c.who,t:c.t,claimId:c.claimId,link:c.link});
     if(c.chat!==active&&roundActive)notify({ic:CHATS[c.chat].emoji,t:CHATS[c.chat].name,b:c.who+': '+c.t.slice(0,34)+'…',chat:c.chat});},d);});
   (r.chatter||[]).forEach(c=>{const d=D*(c.seed!==undefined?c.seed:(0.1+Math.random()*0.75));beat(()=>{
-    addMsg(c.chat,{who:c.who,t:c.t,link:c.link});
+    addMsg(c.chat,{who:c.who,t:c.t,link:c.link,tag:c.tag});
     if(c.chat!==active&&roundActive&&Math.random()<.7)notify({ic:CHATS[c.chat].emoji,t:CHATS[c.chat].name,b:c.who+': '+c.t.slice(0,34)+'…',chat:c.chat});},d);});
   if(r.hint){const hn=r.hint;beat(()=>{
     addMsg(hn.chat,{who:hn.who,t:hn.t});
-    if(roundActive)notify({ic:CHATS[hn.chat].emoji,t:CHATS[hn.chat].name,b:hn.who+': '+hn.t.slice(0,34)+'…',chat:hn.chat});},D*(0.45+Math.random()*0.3));}
+    if(roundActive)notify({ic:CHATS[hn.chat].emoji,t:CHATS[hn.chat].name,b:hn.who+': '+hn.t.slice(0,34)+'…',chat:hn.chat});},D*(hn.seed!==undefined?hn.seed:0.45+Math.random()*0.3));}
   (STORY[i]||[]).forEach(sb=>{beat(()=>{
     if(sb.sys){addMsg(sb.chat,{sys:true,t:sb.t});if(sb.t.includes("Sana left"))sanaGone=true;}
     else addMsg(sb.chat,{who:sb.who,t:sb.t});
@@ -882,6 +889,17 @@ missionEl.addEventListener('click',()=>{
   });
   inp.addEventListener('blur',()=>setTimeout(()=>{if(document.activeElement!==inp)restore();},150));
 });
+/* ---- scoring: per-round answer lock-in, graded at the end ---- */
+const ANSWERS=new Array(7).fill('');
+const normA=s=>(s||'').toLowerCase().trim();
+const timeOK=a=>{a=normA(a).replace(/[\s\.]/g,'');if(!a)return false;if(/(9|half|:30|830)/.test(a))return false;return /(^|[^\d])8(pm)?($|[^\d:])|^20:?00$|eight/.test(a);};
+const GRADERS=[timeOK,a=>normA(a).includes('marmite'),a=>/\b14\b/.test(normA(a))&&!/\b(12|40)\b/.test(normA(a)),a=>/dan/.test(normA(a)),
+ a=>{a=normA(a);if(!a)return false;return /(nothing|no[nt]? |not real|fake|didn'?t happen|never happened|hoax|bogus|no\b)/.test(a)&&!/(something|defo|definitely happened|yes)/.test(a);},
+ timeOK,
+ a=>{a=normA(a);if(!a)return false;return /(\bon\b|yes|still happening|going ahead)/.test(a)&&!/(\boff\b|cancel|not on|no\b)/.test(a);}];
+function lbchk(s){let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))%46655;return h.toString(36);}
+/* the answer is whatever the player last SENT in the chat during the round */
+function captureAnswer(){}
 function finishRound(found){
   if(!roundActive)return;
   // flush every scheduled-but-unfired beat so early "over" never deletes an answer
@@ -903,6 +921,7 @@ function finishRound(found){
   rs.style.display='flex';rs.classList.add('fade');buzz();
 }
 function nextRound(){
+  captureAnswer();
   const last=roundIdx+1>=ROUNDS.length;
   if(!last){
     const ci=document.getElementById('roundcode');
@@ -948,11 +967,19 @@ function startGame(){
 }
 function endGame(){
   clearTimeout(spawnH);clearInterval(tickH);feed.style.filter='blur(3px) brightness(.5)';
+  const score=ANSWERS.reduce((s,a,i)=>s+(GRADERS[i](a)?1:0),0);
+  const marks=ANSWERS.map((a,i)=>GRADERS[i](a)?'✓':'✗').join(' ');
   document.getElementById('endstats').innerHTML=
+    `<div style="margin-bottom:8px">your score: <b>${score}/7</b><br><span style="color:#66757d;font-size:12px;letter-spacing:3px">${marks}</span></div>`+
+    `<input class="codein" id="lbname" placeholder="first name" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" style="margin-bottom:2px">`+
+    `<div id="lbcode" class="codehint">type your first name, press Enter → your code for the leaderboard</div><br>`+
     `You scrolled past <b>${seen}</b> messages across <b>${Object.keys(CHATS).length}</b> chats.<br><br>`+
     `Without scrolling back:<br><span style="color:#9fb0b6">name one thing you're sure is true.</span><br><br>`+
     `<input class="codein" id="sanacode" placeholder="…" autocomplete="off" style="margin-top:6px">`+
     `<div class="codehint">the host has one last word</div><div id="sanareveal" style="display:none;text-align:left;margin-top:14px;font-size:13.5px;line-height:1.7;color:#cbd5d1;max-height:40vh;overflow-y:auto;"></div>`;
+  const ln=document.getElementById('lbname');
+  ln.addEventListener('keydown',ev=>{if(ev.key!=='Enter')return;const nm=ln.value.trim().replace(/[^a-zA-Z]/g,'').slice(0,12);if(!nm)return;
+    document.getElementById('lbcode').textContent='📋 '+nm.toUpperCase()+'-'+score+'-'+lbchk(nm.toLowerCase()+'|'+score+'|ns26').toUpperCase()+' — give this to the host';});
   setTimeout(()=>{const sc=document.getElementById('sanacode');if(!sc)return;
     sc.addEventListener('keydown',ev=>{if(ev.key!=='Enter')return;
       if(sc.value.trim().toLowerCase()==='sana'){
@@ -965,6 +992,16 @@ function endGame(){
 }
 document.getElementById('introcode').addEventListener('keydown',e=>{if(e.key==='Enter')startGame();});
 document.getElementById('roundcode').addEventListener('keydown',e=>{if(e.key==='Enter')nextRound();});
+/* the composer is real: sending a message into the chat is how you answer.
+   the last message you send during a round is your locked-in answer. */
+function sendOwn(){
+  const c=document.getElementById('composer');const t=c.value.trim();if(!t)return;
+  c.value='';addMsg(active,{me:true,t});
+  if(roundActive&&roundIdx>=0&&roundIdx<=6)ANSWERS[roundIdx]=t;
+  buzz();
+}
+document.getElementById('sendbtn').addEventListener('click',sendOwn);
+document.getElementById('composer').addEventListener('keydown',e=>{if(e.key==='Enter')sendOwn();});
 if(FAST)document.getElementById('introhint').textContent='preview code: '+INTRO_CODE;
 </script>
 </body>

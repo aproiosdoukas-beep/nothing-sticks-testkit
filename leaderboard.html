@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>nothing sticks — leaderboard</title>
+<style>
+  body{background:#050a0d;color:#e9edef;font:15px/1.5 system-ui;margin:0;display:flex;justify-content:center}
+  .wrap{max-width:520px;width:100%;padding:28px 18px}
+  h1{font-size:22px;font-weight:800;margin:0 0 4px}
+  .sub{color:#66757d;font-size:12.5px;margin-bottom:18px}
+  input{background:#111b21;border:1px solid #233138;border-radius:9px;color:#e9edef;padding:11px 12px;font-size:15px;width:100%;box-sizing:border-box;outline:none;text-transform:uppercase}
+  input.err{border-color:#c0392b;animation:sh .3s}
+  @keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .hint{color:#66757d;font-size:11.5px;margin:6px 0 18px}
+  table{width:100%;border-collapse:collapse;margin-top:6px}
+  td{padding:9px 8px;border-bottom:1px solid #16232b;font-size:15px}
+  td.rank{width:38px;color:#66757d}
+  td.score{text-align:right;font-weight:800}
+  tr.top td{color:#a7ffeb}
+  .ice{margin-top:26px;padding:13px;border:1px dashed #233138;border-radius:11px}
+  .ice b{color:#ffd180}
+  .ice input{text-transform:none;margin-top:8px}
+  .clear{margin-top:26px;color:#66757d;font-size:11.5px;background:none;border:none;cursor:pointer;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🏆 leaderboard</h1>
+  <div class="sub">players read their score code off their end screen — type it here</div>
+  <input id="code" placeholder="e.g. MAYA-6-K4X" autocomplete="off" autocapitalize="characters" spellcheck="false">
+  <div class="hint" id="msg">Enter to add · invalid or made-up codes are rejected</div>
+  <table id="board"></table>
+  <div class="ice">🍦 <b>free ice cream</b> — first person to say the magic phrase to the host<br>
+    <input id="ice" placeholder="claimed by… (leave blank until someone cracks it)" autocomplete="off">
+  </div>
+  <button class="clear" id="clear">clear board</button>
+</div>
+<script>
+function lbchk(s){let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))%46655;return h.toString(36);}
+const KEY='ns_lb', ICE='ns_ice';
+let rows=JSON.parse(localStorage.getItem(KEY)||'[]');
+const codeEl=document.getElementById('code'), msg=document.getElementById('msg'), board=document.getElementById('board'), ice=document.getElementById('ice');
+ice.value=localStorage.getItem(ICE)||'';
+ice.addEventListener('input',()=>localStorage.setItem(ICE,ice.value));
+function render(){
+  rows.sort((a,b)=>b.score-a.score||a.at-b.at);
+  board.innerHTML=rows.map((r,i)=>{
+    const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
+    return `<tr${i===0?' class="top"':''}><td class="rank">${medal}</td><td>${r.name}</td><td class="score">${r.score}/7</td></tr>`;
+  }).join('');
+  localStorage.setItem(KEY,JSON.stringify(rows));
+}
+codeEl.addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  const m=codeEl.value.trim().toUpperCase().match(/^([A-Z]{1,12})-([0-7])-([A-Z0-9]{1,4})$/);
+  const bad=()=>{codeEl.classList.remove('err');void codeEl.offsetWidth;codeEl.classList.add('err');msg.textContent='not a valid code. read it exactly as shown on the end screen.';};
+  if(!m)return bad();
+  const [,name,score,chk]=m;
+  if(lbchk(name.toLowerCase()+'|'+score+'|ns26').toUpperCase()!==chk)return bad();
+  if(rows.some(r=>r.name===name&&String(r.score)===score)){msg.textContent=name+' is already on the board.';codeEl.value='';return;}
+  rows.push({name,score:+score,at:Date.now()});
+  codeEl.value='';codeEl.classList.remove('err');msg.textContent=name+' added ✓';
+  render();
+});
+document.getElementById('clear').addEventListener('click',()=>{if(confirm('Clear the whole board?')){rows=[];render();}});
+render();
+</script>
+</body>
+</html>
