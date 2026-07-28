@@ -3,7 +3,7 @@
 
 | Round | Mission | True answer | Where it lives | Deliberate false trails |
 |---|---|---|---|---|
-| 1 | What time does Dan's party start? | **8pm** | Big Dan's ALL-CAPS message early in the flood ("8. P. M."); confirmed by the event-page article (link from Tommo) — article contains time ONLY, no address/host | Jess "9, someone's mum said"; Leo (footy) "story said 9"; Ash "half 8" |
+| 1 | What time does Dan's party start? | **8pm** | Big Dan's emphatic message early in the flood ("8. P. M."); confirmed by the event-page article (link from Tommo) — article contains time ONLY, no address/host | Jess "9, someone's mum said"; Leo (footy) "story said 9"; Ash "half 8" |
 | 2 | Code word to get in the door? | **marmite** | Big Dan's message in the "close friends 🔒" chat only (arrives with tappable notification; unread badges persist) | Jess "'party' i heard" in main |
 | 3 | What NUMBER Elm Road? | **14** | Group description pin (tap chat name → Group info). Pin persists from round 3 onward. Pin has address+time, NO names | Jess "12"; Leo (footy) "40" |
 | 4 | Whose house? | **Big Dan's** | Synthesis of two unflagged main-chat messages: Amara "it's at whoever's mum is away this weekend" + Dan "my mum's at auntie carol's til sunday, got the place to myself" | Jess "moved to Kai's"; Leo (footy) "Maya's"; Ash "Tommo's?" |

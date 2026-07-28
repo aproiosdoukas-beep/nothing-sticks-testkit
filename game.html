@@ -37,6 +37,13 @@
   .time{font-size:10px;color:var(--muted);float:right;margin:4px 0 -2px 8px;}
   .tag{display:inline-block;font-size:11px;background:#2a3942;color:var(--link);padding:1px 6px;border-radius:10px;margin-right:4px;}
   .claim{cursor:pointer;}.claim:active{outline:2px solid var(--warn);}
+  .qt{border-left:3px solid #53bdeb;background:#ffffff12;border-radius:5px;padding:3px 7px;margin:1px 0 4px;overflow:hidden;cursor:pointer;max-width:100%;}
+  .qt .qn{font-size:11.5px;font-weight:700;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .qt .qx{font-size:12px;color:#a8b8c0;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .rxw{margin-top:4px;line-height:1;}
+  .rx{display:inline-block;max-width:100%;background:#0b141a;border:1px solid #2a3942;border-radius:11px;padding:2px 7px;font-size:11px;color:#e9edef;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;vertical-align:bottom;}
+  .bub.flash{animation:flashb 1.2s;}
+  @keyframes flashb{0%,100%{box-shadow:0 1px 0 rgba(0,0,0,.25);}30%{box-shadow:0 0 0 2px var(--warn);}}
   .linkcard{margin-top:5px;background:#0d171e;border:1px solid #22323c;border-radius:7px;overflow:hidden;cursor:pointer;}
   .linkcard .thumb{height:64px;background:#22323c;display:flex;align-items:center;justify-content:center;font-size:26px;}
   .linkcard .lc{padding:7px 9px;}.linkcard .lt{font-size:12.5px;font-weight:600;color:#e9edef;}.linkcard .lu{font-size:10.5px;color:var(--muted);margin-top:2px;}
@@ -275,7 +282,7 @@ const LONGPOSTS=[
 const RUMOUR=[
  [{who:"Jess",t:"guys i heard something happened near the station tonight... like properly"},{who:"Leo",t:"there's a VIDEO. it's mad. hang on i'll find it"},{who:"Ollie",t:"our station could never have this much going on"}],
  [{who:"Jess",t:"no but my cousin was literally THERE she said it was chaos"},{who:"Leo",t:"this account says police CONFIRMED something?? which is it",link:"stationbuzz"},{who:"Priya",t:"i don't like this. can everyone stop knowing different things"}],
- [{who:"Bea",t:"jess your cousin is in spain. she posted paella an hour ago"},{who:"Ash",t:"so far i've heard a fight, a fox on the tracks, and 'fireworks gone wrong'. all from people who were 'basically there'"},{who:"Zeke",t:"maybe the station is fine and we're the incident"},{who:"Kai",t:"and yet by tomorrow it'll be 'confirmed'. it always is"}],
+ [{who:"Bea",t:"jess your cousin is in spain. she posted paella an hour ago",replyTo:"my cousin said it was absolute chaos"},{who:"Ash",t:"so far i've heard a fight, a fox on the tracks, and 'fireworks gone wrong'. all from people who were 'basically there'"},{who:"Zeke",t:"maybe the station is fine and we're the incident"},{who:"Kai",t:"and yet by tomorrow it'll be 'confirmed'. it always is"}],
 ];
 
 /* ---- articles (writer 2) ---- */
@@ -317,31 +324,31 @@ const ARTICLES={
 const ROUNDS=[
  {q:"Find out what time Dan's party actually starts.",durationSec:210,early:true,
   claims:[
-   {chat:"main",who:"Big Dan",t:"RIGHT. for the LAST time: doors 8pm tomorrow. posting this now before the chat buries it. 8. P. M.",seed:0.48},
-   {chat:"main",who:"Jess",t:"i heard it's 9 now not 8, someone's mum said",seed:0.28},
-   {chat:"lads",who:"Leo",t:"saw a story saying doors at 9?? looked well official",seed:0.66},
-   {chat:"main",who:"Ash",t:"half 8 surely? i'm sure someone said half 8",seed:0.38}],
+   {chat:"main",who:"Big Dan",t:"right. for the LAST time: doors 8pm tomorrow. posting this now before the chat buries it. 8. P. M.",seed:0.30},
+   {chat:"main",who:"Jess",t:"i heard it's 9 now not 8, someone's mum said",seed:0.28,reacts:"❤️ 14 😂 6"},
+   {chat:"lads",who:"Leo",t:"saw a story saying doors at 9?? looked well official",seed:0.66,reacts:"❤️ 7"},
+   {chat:"main",who:"Ash",t:"half 8 surely? i'm sure someone said half 8",seed:0.38,reacts:"😂 4"}],
   chatter:[
    {chat:"main",who:"Priya",t:"ok but what TIME does it actually start, i need to tell my mum",seed:0.18},
    {chat:"mum",who:"Mum",t:"what time does this party finish love? text me when you're leaving x",seed:0.24},
    {chat:"main",who:"Ollie",t:"time is a construct anyway just turn up whenever like i do",seed:0.3},
    {chat:"main",who:"Tommo",t:"event page is here too if anyone wants it 👇",link:"invite",seed:0.36},
-   {chat:"main",who:"Bea",t:"we've had 8, 9 and half 8 in about ten minutes. love that for us",seed:0.42},
+   {chat:"main",who:"Bea",t:"we've had 8, 9 and half 8 in about ten minutes. love that for us",seed:0.42,reacts:"😂 11"},
    {chat:"close",who:"Priya",t:"do we bring anything?? i'm already stressed and it's not even saturday",seed:0.62},
    {chat:"main",who:"Amara",t:"right. formal enquiry opens. one question, one answer, i believe in us",seed:0.06},
    {chat:"main",who:"Kai",t:"you believe in the wrong group",seed:0.11},
    {chat:"main",who:"Ash",t:"i genuinely just want to know when to leave my house. that's it. that's my whole ambition",seed:0.22},
-   {chat:"main",who:"Maya",t:"jess WHOSE mum. mums are not a source, they're a rumour with a kitchen",seed:0.32},
-   {chat:"main",who:"Priya",t:"we have two different answers already and i have aged visibly",seed:0.35},
-   {chat:"main",who:"Amara",t:"the pattern is: someone says a thing, someone else says a different thing, nobody checks. every single time",seed:0.44},
+   {chat:"main",who:"Maya",t:"jess WHOSE mum. mums are not a source, they're a rumour with a kitchen",seed:0.32,replyTo:"i heard it's 9 now not 8",reacts:"😂 18"},
+   {chat:"main",who:"Priya",t:"we have two different answers already and i have aged visibly",seed:0.35,replyTo:"doors 8pm tomorrow"},
+   {chat:"main",who:"Amara",t:"the pattern is: someone says a thing, someone else says a different thing, nobody checks. every single time",seed:0.44,replyTo:"half 8 surely"},
    {chat:"main",who:"Kai",t:"dan's in caps now. that's as loud as a person can be in text",seed:0.52},
    {chat:"main",who:"Ollie",t:"he'll say it again later and we'll all do this exact bit again",seed:0.58},
-   {chat:"main",who:"Bea",t:"it has been answered. in this chat. by the relevant man. and we are all still typing",seed:0.64},
+   {chat:"main",who:"Bea",t:"it has been answered. in this chat. by the relevant man. and we are all still typing",seed:0.64,replyTo:"doors 8pm tomorrow"},
    {chat:"main",who:"Maya",t:"can we agree as a group to scroll up before we type. as a family. as a people",seed:0.78},
    {chat:"main",who:"Ash",t:"scrolled up. found three arguments i wasn't even in. still lost",seed:0.86},
-   {chat:"main",who:"Amara",t:"for the record it WAS answered, by the person whose thing it is. revolutionary concept apparently",seed:0.92},
+   {chat:"main",who:"Amara",t:"for the record it WAS answered, by the person whose thing it is. revolutionary concept apparently",seed:0.92,replyTo:"8. P. M.",reacts:"❤️ 5"},
    {chat:"main",who:"Tommo",t:"unrelated but i've invested. whole box of bucket hats off a site i found. reselling at a markup",seed:0.5},
-   {chat:"main",who:"Bea",t:"invested. he means spent",seed:0.55},
+   {chat:"main",who:"Bea",t:"invested. he means spent",seed:0.55,replyTo:"whole box of bucket hats"},
    {chat:"main",who:"Naz",t:"what site. say the name of the site tommo",seed:0.6},
    {chat:"main",who:"Tommo",t:"it had reviews",seed:0.65},
    {chat:"main",who:"Priya",t:"separately: made a colour coded revision timetable and i feel like a new woman",seed:0.7},
@@ -351,40 +358,40 @@ const ROUNDS=[
   hint:{chat:"close",who:"Maya",t:"dan literally announced it in the chat earlier. scroll UP not down lol",seed:0.72}},
  {q:"There's a code word to get in the door. What is it?",durationSec:210,
   claims:[
-   {chat:"close",who:"Big Dan",t:"NOT putting this in the big chat: say 'marmite' at the door or you're not getting in. tell NO ONE",seed:0.46},
-   {chat:"main",who:"Jess",t:"door code is 'party' i heard",seed:0.3},
-   {chat:"main",who:"Tommo",t:"someone sell me the code, i'll pay in monster",seed:0.6}],
+   {chat:"close",who:"Big Dan",t:"NOT putting this in the big chat: say 'marmite' at the door or you're not getting in. tell NO ONE",seed:0.46,reacts:"👍 2"},
+   {chat:"main",who:"Jess",t:"door code is 'party' i heard",seed:0.3,reacts:"❤️ 12 😂 5"},
+   {chat:"main",who:"Tommo",t:"someone sell me the code, i'll pay in monster",seed:0.6,reacts:"😂 9"}],
   chatter:[
    {chat:"main",who:"Priya",t:"why do we need a code word this isn't a heist",seed:0.18},
-   {chat:"main",who:"Bea",t:"dan's drunk with power already",seed:0.34},
+   {chat:"main",who:"Bea",t:"dan's drunk with power already",seed:0.34,reacts:"😂 7"},
    {chat:"main",who:"Ollie",t:"i'm just going to shout random words at the door until it opens",seed:0.68},
    {chat:"main",who:"Maya",t:"a code word. we can't agree on anything and now there's a PASSWORD involved",seed:0.08},
    {chat:"main",who:"Kai",t:"we're going to get turned away as a group. all of us. in a line",seed:0.14},
    {chat:"main",who:"Ash",t:"if i say the wrong word does he just... not let me in. is that the system",seed:0.26},
-   {chat:"main",who:"Naz",t:"jess where did you hear that one. genuine question, not being annoying",seed:0.38},
-   {chat:"main",who:"Jess",t:"someone said it. i don't remember who. it was said though",seed:0.41},
-   {chat:"main",who:"Bea",t:"'it was said though' is going on my gravestone",seed:0.5},
+   {chat:"main",who:"Naz",t:"jess where did you hear that one. genuine question, not being annoying",seed:0.38,replyTo:"door code is 'party'"},
+   {chat:"main",who:"Jess",t:"someone said it. i don't remember who. it was said though",seed:0.41,replyTo:"jess where did you hear that one"},
+   {chat:"main",who:"Bea",t:"'it was said though' is going on my gravestone",seed:0.5,replyTo:"it was said though",reacts:"😂 16"},
    {chat:"main",who:"Priya",t:"i'm going to write it on my hand and then sweat it off. i can feel it happening already",seed:0.54},
    {chat:"main",who:"Amara",t:"the man who invented the word is IN this chat. ask HIM. not the chat. him",seed:0.63},
    {chat:"main",who:"Maya",t:"has anyone actually asked him directly or are we doing amateur archaeology again",seed:0.72},
    {chat:"main",who:"Kai",t:"we are going to shout words at a door tonight and it will be entirely our own fault",seed:0.8},
    {chat:"main",who:"Ash",t:"i've written down two words. one of them is wrong. loving this for me",seed:0.88},
    {chat:"main",who:"Tommo",t:"hat update: dispatched. tracking says they're in a country i have never heard of",seed:0.28},
-   {chat:"main",who:"Kai",t:"the hats are having a better summer than us",seed:0.33},
+   {chat:"main",who:"Kai",t:"the hats are having a better summer than us",seed:0.33,replyTo:"hat update: dispatched"},
    {chat:"main",who:"Naz",t:"i looked up that site. every review was posted in the same week. by people with no other reviews",seed:0.36},
    {chat:"main",who:"Priya",t:"timetable update: had to add a tab. the tab is for the things that don't fit in the other tabs",seed:0.44},
-   {chat:"main",who:"Amara",t:"structurally that's a filing cabinet with a spreadsheet balanced on top of it",seed:0.48},
+   {chat:"main",who:"Amara",t:"structurally that's a filing cabinet with a spreadsheet balanced on top of it",seed:0.48,replyTo:"timetable update: had to add a tab"},
    {chat:"main",who:"Bea",t:"she's revising the revising",seed:0.52},
-   {chat:"main",who:"Jess",t:"naz you were right about the site thing. how did you even know",seed:0.66},
+   {chat:"main",who:"Jess",t:"naz you were right about the site thing. how did you even know",seed:0.66,replyTo:"i looked up that site"},
    {chat:"main",who:"Naz",t:"i clicked on it. that's the entire trick. i clicked on it",seed:0.7},
-   {chat:"main",who:"Kai",t:"starting a tally. naz: one. everyone else: vibes",seed:0.75}],
+   {chat:"main",who:"Kai",t:"starting a tally. naz: one. everyone else: vibes",seed:0.75,reacts:"❤️ 4"}],
   hint:{chat:"main",who:"Amara",t:"maybe check your OTHER chats? not everything happens in here you know",seed:0.56}},
  {q:"What NUMBER Elm Road? Get it exactly right.",durationSec:210,inDesc:true,
   descPin:"📌 SATURDAY — 14 Elm Road. knock don't ring (bell's broken). shoes off please 🙏",
   claims:[
-   {chat:"main",who:"Jess",t:"12 elm road!! i'm basically sure",seed:0.3},
-   {chat:"lads",who:"Leo",t:"40?? someone said 40 elm road",seed:0.5},
-   {chat:"main",who:"Ash",t:"i'm just going to walk down the street and follow the noise",seed:0.7}],
+   {chat:"main",who:"Jess",t:"12 elm road!! i'm basically sure",seed:0.3,reacts:"❤️ 11 😂 4"},
+   {chat:"lads",who:"Leo",t:"40?? someone said 40 elm road",seed:0.5,reacts:"❤️ 6"},
+   {chat:"main",who:"Ash",t:"i'm just going to walk down the street and follow the noise",seed:0.7,reacts:"😂 8"}],
   chatter:[
    {chat:"mum",who:"Mum",t:"text me the address please, just in case x",seed:0.2},
    {chat:"main",who:"Big Dan",t:"IT'S PINNED. IT HAS BEEN PINNED FOR A WEEK",seed:0.42},
@@ -392,24 +399,24 @@ const ROUNDS=[
    {chat:"main",who:"Priya",t:"does anyone else feel like we are being tested by something bigger than us",seed:0.07},
    {chat:"main",who:"Amara",t:"we have the information. we have HAD the information. we simply do not read",seed:0.12},
    {chat:"main",who:"Kai",t:"say a number at me with confidence and i'll believe it instantly. that's my whole policy",seed:0.24},
-   {chat:"main",who:"Naz",t:"jess is 'basically sure'. that is the most dangerous phrase in the language",seed:0.34},
-   {chat:"main",who:"Bea",t:"basically sure. the confidence of a man who has never once checked anything",seed:0.37},
-   {chat:"main",who:"Maya",t:"dan's in caps again. second time tonight. he is going to combust in front of us",seed:0.46},
+   {chat:"main",who:"Naz",t:"jess is 'basically sure'. that is the most dangerous phrase in the language",seed:0.34,replyTo:"12 elm road",reacts:"❤️ 5"},
+   {chat:"main",who:"Bea",t:"basically sure. the confidence of a man who has never once checked anything",seed:0.37,replyTo:"the most dangerous phrase",reacts:"😂 13"},
+   {chat:"main",who:"Maya",t:"dan's in caps again. second time tonight. he is going to combust in front of us",seed:0.46,replyTo:"IT'S PINNED"},
    {chat:"main",who:"Amara",t:"and now there's another one. we're collecting these like stickers",seed:0.53},
    {chat:"main",who:"Ollie",t:"honestly i'll just knock on every door until someone recognises me",seed:0.6},
    {chat:"main",who:"Priya",t:"i want ONE person to say a thing that is actually written down somewhere. one",seed:0.66},
-   {chat:"main",who:"Kai",t:"it IS written down somewhere. that's the genuinely funny part",seed:0.74},
+   {chat:"main",who:"Kai",t:"it IS written down somewhere. that's the genuinely funny part",seed:0.74,replyTo:"i want ONE person to say a thing"},
    {chat:"main",who:"Maya",t:"we have spent this whole evening ignoring the one message someone put there on purpose",seed:0.82},
    {chat:"main",who:"Ash",t:"found it. i think. i've found something anyway",seed:0.9},
    {chat:"main",who:"Tommo",t:"THE HATS HAVE LANDED",seed:0.28},
    {chat:"main",who:"Priya",t:"why are you shouting about hats i am trying to revise",seed:0.31},
    {chat:"main",who:"Tommo",t:"...they're small",seed:0.34},
-   {chat:"main",who:"Bea",t:"define small",seed:0.38},
+   {chat:"main",who:"Bea",t:"define small",seed:0.38,replyTo:"they're small"},
    {chat:"main",who:"Tommo",t:"they fit my fist",seed:0.4},
    {chat:"main",who:"Priya",t:"i have made a second spreadsheet. to manage the first spreadsheet",seed:0.44},
    {chat:"main",who:"Kai",t:"priya",seed:0.47},
    {chat:"main",who:"Frankie",t:"i read somewhere that the people who plan the most start the latest. sorry",seed:0.5},
-   {chat:"main",who:"Priya",t:"FRANKIE",seed:0.52},
+   {chat:"main",who:"Priya",t:"FRANKIE",seed:0.52,replyTo:"the people who plan the most start the latest"},
    {chat:"main",who:"Frankie",t:"tally note: naz has been right about the site AND the hats and has been thanked zero times",seed:0.62},
    {chat:"main",who:"Naz",t:"i don't want thanks. i want people to click things",seed:0.68}],
   hint:{chat:"close",who:"Maya",t:"tap the chat name babe. the description. it's been there the whole time",seed:0.5}},
@@ -417,27 +424,27 @@ const ROUNDS=[
   claims:[
    {chat:"main",who:"Amara",t:"all i actually know is it's at whoever's mum is away this weekend",seed:0.22},
    {chat:"main",who:"Big Dan",t:"unrelated but my mum's at auntie carol's til sunday so i've got the place to myself 😌",seed:0.54},
-   {chat:"main",who:"Jess",t:"it moved to kai's i heard, something about dan's carpet",seed:0.35},
-   {chat:"lads",who:"Leo",t:"someone posted it's at maya's?? big if true",seed:0.66}],
+   {chat:"main",who:"Jess",t:"it moved to kai's i heard, something about dan's carpet",seed:0.35,reacts:"❤️ 15 😂 3"},
+   {chat:"lads",who:"Leo",t:"someone posted it's at maya's?? big if true",seed:0.66,reacts:"❤️ 8"}],
   chatter:[
-   {chat:"main",who:"Zeke",t:"a house is just walls we all agreed to believe in",seed:0.14},
+   {chat:"main",who:"Zeke",t:"a house is just walls we all agreed to believe in",seed:0.14,reacts:"❤️ 6"},
    {chat:"close",who:"Sana",t:"if i have to scroll up one more time i'm going to sleep instead",seed:0.3},
    {chat:"main",who:"Big Dan",t:"OUR DOORBELL HAS BEEN DEAD SINCE 2023 AND DAD STILL HASN'T FIXED IT. YOU HAVE TO KNOCK LIKE IT'S THE 1800s",seed:0.45},
-   {chat:"main",who:"Bea",t:"some of you would lose a treasure hunt with one clue",seed:0.62},
+   {chat:"main",who:"Bea",t:"some of you would lose a treasure hunt with one clue",seed:0.62,reacts:"😂 9"},
    {chat:"main",who:"Maya",t:"why does nobody know whose house it is. that's normally the easy bit",seed:0.08},
    {chat:"main",who:"Kai",t:"we know the day, we know the word, we know the road. just not... whose",seed:0.18},
-   {chat:"main",who:"Priya",t:"so it's whoever's mum is away. brilliant. that's a riddle, not an address",seed:0.27},
-   {chat:"main",who:"Naz",t:"jess: 'i heard'. again. i'm keeping a tally at this point and it's getting long",seed:0.39},
-   {chat:"main",who:"Kai",t:"the tally is basically her personality now",seed:0.42},
-   {chat:"main",who:"Bea",t:"he's yelling about a doorbell. i don't think he's clocked what he just told us",seed:0.49},
+   {chat:"main",who:"Priya",t:"so it's whoever's mum is away. brilliant. that's a riddle, not an address",seed:0.27,replyTo:"whoever's mum is away this weekend"},
+   {chat:"main",who:"Naz",t:"jess: 'i heard'. again. i'm keeping a tally at this point and it's getting long",seed:0.39,replyTo:"it moved to kai's i heard"},
+   {chat:"main",who:"Kai",t:"the tally is basically her personality now",seed:0.42,replyTo:"i'm keeping a tally at this point",reacts:"😂 10"},
+   {chat:"main",who:"Bea",t:"he's yelling about a doorbell. i don't think he's clocked what he just told us",seed:0.49,replyTo:"OUR DOORBELL HAS BEEN DEAD SINCE 2023"},
    {chat:"main",who:"Amara",t:"he says the most revealing things when he's annoyed and nobody's listening",seed:0.58},
    {chat:"main",who:"Maya",t:"wait. WAIT. hang on",seed:0.64},
-   {chat:"main",who:"Ash",t:"what. what did you see. maya WHAT",seed:0.69},
+   {chat:"main",who:"Ash",t:"what. what did you see. maya WHAT",seed:0.69,replyTo:"wait. WAIT. hang on"},
    {chat:"main",who:"Priya",t:"someone say it out loud please, i'm too anxious to be the one who's wrong",seed:0.76},
    {chat:"main",who:"Kai",t:"nobody's going to say it. that's the entire game",seed:0.84},
    {chat:"main",who:"Bea",t:"it was in front of us the whole time and we chose vibes instead",seed:0.9},
    {chat:"main",who:"Tommo",t:"new plan. they're not small hats. they are DOG hats. premium pet accessory. huge market",seed:0.3},
-   {chat:"main",who:"Amara",t:"you've built a business on top of a mistake and then doubled down on it. respect and horror",seed:0.34},
+   {chat:"main",who:"Amara",t:"you've built a business on top of a mistake and then doubled down on it. respect and horror",seed:0.34,replyTo:"they are DOG hats"},
    {chat:"main",who:"Bea",t:"i'll test one on my dog. purely so i can report back to you all",seed:0.37},
    {chat:"main",who:"Priya",t:"spent the entire afternoon on the colours. did no revision. colours look incredible though",seed:0.5},
    {chat:"main",who:"Amara",t:"structurally you've converted anxiety into admin. it's very tidy anxiety now",seed:0.55},
@@ -448,24 +455,24 @@ const ROUNDS=[
   hint:{chat:"close",who:"Kai",t:"nobody's going to SAY it. two different messages. put them together. like a detective but tired",seed:0.72}},
  {q:"Did something actually happen at the station? Find out.",durationSec:210,
   claims:[
-   {chat:"main",who:"Leo",t:"it's REAL there's a video with 2 million views. watch it",seed:0.25,link:"stationvid"},
-   {chat:"main",who:"Jess",t:"my cousin said it was absolute chaos down there",seed:0.4},
-   {chat:"main",who:"Naz",t:"police put out an actual statement. here.",seed:0.6,link:"police"},
-   {chat:"main",who:"Kai",t:"the comments under that video are a journey btw",seed:0.72}],
+   {chat:"main",who:"Leo",t:"it's REAL there's a video with 2 million views. watch it",seed:0.25,reacts:"❤️ 21 😂 4",link:"stationvid"},
+   {chat:"main",who:"Jess",t:"my cousin said it was absolute chaos down there",seed:0.4,reacts:"❤️ 13"},
+   {chat:"main",who:"Naz",t:"police put out an actual statement. here.",seed:0.6,reacts:"👍 2",link:"police"},
+   {chat:"main",who:"Kai",t:"the comments under that video are a journey btw",seed:0.72,reacts:"😂 7"}],
   chatter:[
    {chat:"main",who:"Priya",t:"i'm not going near the station ever again",seed:0.32},
-   {chat:"main",who:"Big Dan",t:"CAN EVERYONE STOP FORWARDING ME THAT VIDEO",seed:0.46},
+   {chat:"main",who:"Big Dan",t:"CAN EVERYONE STOP FORWARDING ME THAT VIDEO",seed:0.46,reacts:"😂 8"},
    {chat:"lads",who:"Ollie",t:"walked past the station earlier, saw nothing. doesn't prove anything tho does it",seed:0.5},
-   {chat:"main",who:"Bea",t:"2 million people watched it and like 12 read the comments. incredible",seed:0.78},
+   {chat:"main",who:"Bea",t:"2 million people watched it and like 12 read the comments. incredible",seed:0.78,replyTo:"the comments under that video are a journey"},
    {chat:"main",who:"Amara",t:"before anyone forwards me anything else: what are we actually asking here",seed:0.1},
    {chat:"main",who:"Ash",t:"i think we're asking whether a thing happened. i've genuinely lost the thread",seed:0.14},
-   {chat:"main",who:"Kai",t:"two million views means two million people were bored in bed. it doesn't mean a thing happened",seed:0.3},
-   {chat:"main",who:"Naz",t:"jess. 'my cousin'. we have been here before with your cousin",seed:0.44},
-   {chat:"main",who:"Bea",t:"the cousin cinematic universe",seed:0.47},
+   {chat:"main",who:"Kai",t:"two million views means two million people were bored in bed. it doesn't mean a thing happened",seed:0.3,replyTo:"there's a video with 2 million views"},
+   {chat:"main",who:"Naz",t:"jess. 'my cousin'. we have been here before with your cousin",seed:0.44,replyTo:"my cousin said it was absolute chaos"},
+   {chat:"main",who:"Bea",t:"the cousin cinematic universe",seed:0.47,replyTo:"we have been here before with your cousin",reacts:"😂 19"},
    {chat:"main",who:"Priya",t:"everyone is describing it and not one person was there. does anybody else notice that",seed:0.53},
    {chat:"main",who:"Maya",t:"i've now heard this from four people and all four heard it from each other",seed:0.57},
    {chat:"main",who:"Amara",t:"one of the things in this chat can actually be checked. one of them. that's the whole difference",seed:0.64},
-   {chat:"main",who:"Ash",t:"which one though. they both look official to me",seed:0.7},
+   {chat:"main",who:"Ash",t:"which one though. they both look official to me",seed:0.7,replyTo:"one of the things in this chat can actually be checked"},
    {chat:"main",who:"Kai",t:"'looked official' has done more damage tonight than any actual lie",seed:0.76},
    {chat:"main",who:"Amara",t:"progress: we've stopped forwarding and started reading. barely. but i'll take it",seed:0.86},
    {chat:"main",who:"Maya",t:"can ONE person tonight give me a straight answer they got from somewhere real",seed:0.92},
@@ -474,40 +481,40 @@ const ROUNDS=[
    {chat:"main",who:"Tommo",t:"that's ONE dog. one dog's opinion",seed:0.42},
    {chat:"main",who:"Priya",t:"the spreadsheet has broken. a formula ate itself and every cell says NAME question mark",seed:0.66},
    {chat:"main",who:"Big Dan",t:"WHAT DOES THAT EVEN MEAN PRIYA",seed:0.71},
-   {chat:"main",who:"Naz",t:"it means a cell is pointing at a cell that's pointing back at it. i did warn you about the tabs",seed:0.74},
+   {chat:"main",who:"Naz",t:"it means a cell is pointing at a cell that's pointing back at it. i did warn you about the tabs",seed:0.74,replyTo:"WHAT DOES THAT EVEN MEAN PRIYA"},
    {chat:"main",who:"Kai",t:"naz called the spreadsheet thing before it happened. tally again",seed:0.8},
    {chat:"main",who:"Frankie",t:"his hit rate is genuinely unreasonable",seed:0.84},
    {chat:"main",who:"Naz",t:"i just read things all the way to the end. it's not a superpower, it's boredom",seed:0.88}],
   hint:{chat:"close",who:"Amara",t:"open the video page and actually read UNDER it. then read the police one. which can you check?",seed:0.66}},
  {q:"Prove the time from the ORIGINAL source.",durationSec:210,
   claims:[
-   {chat:"main",who:"Tommo",t:"easy, the og invite is right — wait. it's gone?? the page is GONE",seed:0.25,link:"gone"},
+   {chat:"main",who:"Tommo",t:"easy, the og invite is right — wait. it's gone?? the page is GONE",seed:0.25,reacts:"❤️ 9",link:"gone"},
    {chat:"unknown",who:"Unknown",t:"it's 10 now. trust me. i know dan.",seed:0.52},
-   {chat:"main",who:"Jess",t:"i heard the page got deleted BECAUSE the time changed 👀👀",seed:0.65},
-   {chat:"main",who:"Frankie",t:"deleted pages don't actually die btw. there's a cached snapshot of the invite. look",seed:0.78,link:"cached"}],
+   {chat:"main",who:"Jess",t:"i heard the page got deleted BECAUSE the time changed 👀👀",seed:0.65,reacts:"❤️ 17 😂 6"},
+   {chat:"main",who:"Frankie",t:"deleted pages don't actually die btw. there's a cached snapshot of the invite. look",seed:0.78,reacts:"👍 2",link:"cached"}],
   chatter:[
-   {chat:"main",who:"Naz",t:"a deleted page is evidence of a deleted page. that's it. that's all it proves",seed:0.32},
+   {chat:"main",who:"Naz",t:"a deleted page is evidence of a deleted page. that's it. that's all it proves",seed:0.32,replyTo:"the page is GONE"},
    {chat:"main",who:"Ash",t:"so the one thing that was definitely real is now... not there. cool cool cool",seed:0.37},
    {chat:"main",who:"Jess",t:"there's literally an article saying it moved to 9",link:"timeA",seed:0.42},
-   {chat:"main",who:"Ash",t:"and this one says still 8?? i give up",link:"timeB",seed:0.47},
+   {chat:"main",who:"Ash",t:"and this one says still 8?? i give up",link:"timeB",seed:0.47,replyTo:"there's literally an article saying it moved to 9"},
    {chat:"close",who:"Priya",t:"why is an unknown number texting me about the party i feel sick",seed:0.57},
    {chat:"main",who:"unknown number",t:"📣 ok this one's actually real: the FIRST person to quietly say \"flake 99\" to the host wins a free ice cream. genuinely. we know exactly how this sounds.",tag:"ad",seed:0.6},
    {chat:"main",who:"Leo",t:"someone airdropped me this as 'proof' lol",link:"screenshot",seed:0.63},
    {chat:"main",who:"Big Dan",t:"THE LINK EXPIRED. MY PHONE DIED. THERE IS NO CONSPIRACY",seed:0.7},
    {chat:"main",who:"Amara",t:"tonight's question isn't 'what's the answer'. it's 'who said it FIRST'",seed:0.08},
-   {chat:"main",who:"Maya",t:"oh we're doing detective work. let me get my little hat",seed:0.14},
+   {chat:"main",who:"Maya",t:"oh we're doing detective work. let me get my little hat",seed:0.14,reacts:"😂 10"},
    {chat:"main",who:"Kai",t:"we've played telephone all evening and now we have to find the first person on the phone",seed:0.2},
-   {chat:"main",who:"Bea",t:"of course it's missing. the ONE thing that would have settled it",seed:0.29},
+   {chat:"main",who:"Bea",t:"of course it's missing. the ONE thing that would have settled it",seed:0.29,replyTo:"the page is GONE"},
    {chat:"main",who:"Priya",t:"why does that feel sinister. why does a missing page feel sinister",seed:0.34},
    {chat:"main",who:"Ollie",t:"it isn't sinister. things just disappear. like my motivation",seed:0.4},
    {chat:"main",who:"Maya",t:"two write ups, two different moods. brilliant. love it. no notes",seed:0.45},
    {chat:"main",who:"Naz",t:"a random number is not a source. i am begging this chat",seed:0.55},
-   {chat:"main",who:"Bea",t:"leo's proof is a picture of words. anyone can make a picture of words",seed:0.68},
+   {chat:"main",who:"Bea",t:"leo's proof is a picture of words. anyone can make a picture of words",seed:0.68,replyTo:"someone airdropped me this as 'proof'",reacts:"😂 12"},
    {chat:"main",who:"Amara",t:"everything in here is a copy of a copy. find the thing it was all copied FROM",seed:0.74},
-   {chat:"main",who:"Kai",t:"so nothing was hidden, dan's phone is simply a potato. mystery over",seed:0.84},
+   {chat:"main",who:"Kai",t:"so nothing was hidden, dan's phone is simply a potato. mystery over",seed:0.84,replyTo:"THE LINK EXPIRED. MY PHONE DIED"},
    {chat:"main",who:"Priya",t:"i have never wanted a screenshot to be real this badly and i still don't believe it",seed:0.9},
    {chat:"main",who:"Tommo",t:"hat news: the seller has stopped replying to me entirely",seed:0.3},
-   {chat:"main",who:"Naz",t:"as previously mentioned",seed:0.34},
+   {chat:"main",who:"Naz",t:"as previously mentioned",seed:0.34,replyTo:"the seller has stopped replying to me"},
    {chat:"main",who:"Tommo",t:"you do not have to enjoy this as much as you are enjoying it",seed:0.38},
    {chat:"main",who:"Priya",t:"i've deleted it. all of it. both spreadsheets. i feel weightless and also sick",seed:0.42},
    {chat:"main",who:"Kai",t:"a hero's journey",seed:0.46},
@@ -518,30 +525,30 @@ const ROUNDS=[
   hint:{chat:"close",who:"Maya",t:"who even made the original invite? and would dan text u off a random number... think",seed:0.5}},
  {q:"Is the party still ON — yes or no?",durationSec:210,
   claims:[
-   {chat:"main",who:"Leo",t:"new video says the whole thing's cancelled. 300k views already",seed:0.2},
-   {chat:"main",who:"Jess",t:"dan's mum came home early i heard. it's off",seed:0.35},
+   {chat:"main",who:"Leo",t:"new video says the whole thing's cancelled. 300k views already",seed:0.2,reacts:"❤️ 23 😂 5"},
+   {chat:"main",who:"Jess",t:"dan's mum came home early i heard. it's off",seed:0.35,reacts:"❤️ 18 😂 4"},
    {chat:"unknown",who:"Unknown",t:"it's off. trust me. don't go.",seed:0.5},
    {chat:"main",who:"Big Dan",t:"i'm saying this ONCE. the party is ON. 8pm. my house. stop asking the internet things and ask ME.",seed:0.62}],
   chatter:[
-   {chat:"main",who:"Ollie",t:"if it's cancelled i'm turning up anyway. for the plot",seed:0.28},
+   {chat:"main",who:"Ollie",t:"if it's cancelled i'm turning up anyway. for the plot",seed:0.28,reacts:"😂 11"},
    {chat:"main",who:"Zeke",t:"what if the party was the rumours we made along the way",seed:0.34},
    {chat:"main",who:"Priya",t:"can someone just give me a yes or no i'm begging",seed:0.42},
-   {chat:"main",who:"Bea",t:"i'll believe it when dan says it himself",seed:0.55},
+   {chat:"main",who:"Bea",t:"i'll believe it when dan says it himself",seed:0.55,replyTo:"dan's mum came home early i heard"},
    {chat:"main",who:"Maya",t:"we have spent an entire evening on this and now the question is whether it EXISTS",seed:0.07},
    {chat:"main",who:"Kai",t:"full circle. and the circle is stupid",seed:0.12},
    {chat:"main",who:"Amara",t:"before we spiral: who is the actual source of this one",seed:0.17},
-   {chat:"main",who:"Bea",t:"a video. it's a video. it is always a video",seed:0.24},
+   {chat:"main",who:"Bea",t:"a video. it's a video. it is always a video",seed:0.24,replyTo:"new video says the whole thing's cancelled",reacts:"😂 14"},
    {chat:"main",who:"Ash",t:"i've changed my mind four times tonight and nobody has told me anything new",seed:0.31},
-   {chat:"main",who:"Naz",t:"jess. a cousin. someone's mum. every round tonight, same shape, different noun",seed:0.39},
-   {chat:"main",who:"Frankie",t:"if you tally who's actually been right tonight it's basically one man and he gets ignored every time",seed:0.46},
+   {chat:"main",who:"Naz",t:"jess. a cousin. someone's mum. every round tonight, same shape, different noun",seed:0.39,replyTo:"dan's mum came home early i heard",reacts:"❤️ 6"},
+   {chat:"main",who:"Frankie",t:"if you tally who's actually been right tonight it's basically one man and he gets ignored every time",seed:0.46,replyTo:"same shape, different noun"},
    {chat:"main",who:"Maya",t:"an unknown number is telling us what to do and some of you are genuinely considering it",seed:0.54},
    {chat:"main",who:"Amara",t:"the person whose thing this is has been in this chat all evening saying the same sentence",seed:0.6},
    {chat:"main",who:"Priya",t:"i have asked for a yes or a no more times than i can count",seed:0.68},
-   {chat:"main",who:"Kai",t:"the answer's been the same all night. we just enjoyed the noise more",seed:0.8},
+   {chat:"main",who:"Kai",t:"the answer's been the same all night. we just enjoyed the noise more",seed:0.8,replyTo:"the party is ON. 8pm. my house."},
    {chat:"main",who:"Bea",t:"one person actually knows. everyone else has a feeling. wild that we treat those the same",seed:0.88},
    {chat:"main",who:"Tommo",t:"final hat update. i've given them all away. every single one. free",seed:0.3},
    {chat:"main",who:"Bea",t:"my dog kept hers. she wears it voluntarily now. she's insufferable",seed:0.35},
-   {chat:"main",who:"Kai",t:"so the business worked. for dogs. for free. at a loss",seed:0.42},
+   {chat:"main",who:"Kai",t:"so the business worked. for dogs. for free. at a loss",seed:0.42,replyTo:"i've given them all away"},
    {chat:"main",who:"Tommo",t:"i'm calling that a pilot scheme",seed:0.44},
    {chat:"main",who:"Priya",t:"new system is a bit of paper on my wall with three things on it. i've done all three",seed:0.52},
    {chat:"main",who:"Amara",t:"that is the ending i wanted for you",seed:0.56},
@@ -872,10 +879,13 @@ const feed=document.getElementById('feed'),typingEl=document.getElementById('typ
 let active="main",started=0,seen=0,roundIdx=-1,roundActive=false,roundEndAt=0;
 let chatMsgs={},unread={};Object.keys(CHATS).forEach(c=>{chatMsgs[c]=[];unread[c]=0;});
 let spawnH=null,tickH=null,speed=1800,roundTimers=[];let roundBeats=[];
+let MSGID=0,ackCount=0,typeLock=0;
 
 function scale(s){return FAST?Math.max(18,Math.round(s/5)):s;}
 function now(){const b=20*60+Math.floor((Date.now()-started)/4000);return String(Math.floor(b/60)%24).padStart(2,'0')+":"+String(b%60).padStart(2,'0');}
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
+/* bubbles are innerHTML; quotes can carry the PLAYER's own text, so escape */
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function atBottom(){return feed.scrollHeight-feed.scrollTop-feed.clientHeight<130;}
 function buzz(){if(navigator.vibrate)navigator.vibrate(16);}
 
@@ -908,23 +918,47 @@ function nextFloodMsg(){
 }
 
 function imgHTML(im){return `<div class="img ${im.type}">${im.likes?`<span class="likes">${im.likes}</span>`:''}<div class="mid">${im.mid}</div><div class="cap">${im.cap||''}</div></div>`;}
+/* quote-reply: `replyTo` holds a verbatim snippet of an earlier message. Resolve
+   it at render time against the message's own chat — first earlier message whose
+   .t contains the snippet wins. Unresolved snippets still render, never throw. */
+function quoteHTML(o){
+  const src=chatMsgs[o._chat]||[];let orig=null;
+  for(let i=0;i<src.length;i++){const m=src[i];if(m===o)break;
+    if(m.t&&!m.sys&&m.t.indexOf(o.replyTo)>=0){orig=m;break;}}
+  const nm=orig?(orig.me?'You':(orig.who||'…')):'…';
+  const col=orig?(orig.me?'var(--accent)':(colorOf[orig.who]||'#8bd')):'#8696a0';
+  const raw=String((orig?orig.t:o.replyTo)||'');
+  const txt=raw.length>60?raw.slice(0,60)+'…':raw;
+  const ref=(orig&&orig._id)?` data-qref="${orig._id}"`:'';
+  return `<div class="qt"${ref}><div class="qn" style="color:${col}">${esc(nm)}</div><div class="qx">${esc(txt)}</div></div>`;
+}
 function makeNode(o){
   if(o.sys){const d=document.createElement('div');d.className='sys';d.textContent=o.t;return d;}
   const row=document.createElement('div');row.className='row '+(o.me?'me':'them');
+  if(o._id)row.dataset.mid=o._id;
   const bub=document.createElement('div');bub.className='bub'+(o.claimId?' claim':'');
   let h='';
   if(!o.me)h+=`<div class="who" style="color:${colorOf[o.who]||'#8bd'}">${o.who}</div>`;
+  if(o.replyTo)h+=quoteHTML(o);
   if(o.tag)h+=`<span class="tag">${o.tag==='news'?'🔴 news':o.tag==='ad'?'promoted':o.tag}</span>`;
-  h+=`<span class="txt">${o.t}</span>`;
+  h+=`<span class="txt">${o.me?esc(o.t):o.t}</span>`;
   if(o.img)h+=imgHTML(o.img);
   if(o.link&&ARTICLES[o.link]){const a=ARTICLES[o.link];h+=`<div class="linkcard" data-art="${o.link}"><div class="thumb">${a.emoji}</div><div class="lc"><div class="lt">${a.title||a.url}</div><div class="lu">${a.url}</div></div></div>`;}
+  if(o.reacts)h+=`<div class="rxw"><span class="rx">${esc(o.reacts)}</span></div>`;
   h+=`<span class="time">${o.tm||now()}</span>`;bub.innerHTML=h;
   const lc=bub.querySelector('.linkcard');if(lc)lc.addEventListener('click',(e)=>{e.stopPropagation();openArticle(lc.dataset.art);});
+  const qt=bub.querySelector('.qt[data-qref]');
+  if(qt)qt.addEventListener('click',(e)=>{e.stopPropagation();
+    const tgt=feed.querySelector('[data-mid="'+qt.dataset.qref+'"]');if(!tgt)return;
+    tgt.scrollIntoView({block:'center'});
+    const b2=tgt.querySelector('.bub')||tgt;
+    b2.classList.remove('flash');void b2.offsetWidth;b2.classList.add('flash');
+    setTimeout(()=>b2.classList.remove('flash'),1400);});
   row.appendChild(bub);return row;
 }
 function updateBackBadge(){const t=Object.values(unread).reduce((a,b)=>a+b,0);const b=document.getElementById('backbadge');
   if(t>0){b.style.display='flex';b.textContent=t>99?'99+':t;}else b.style.display='none';}
-function addMsg(chat,o){seen++;if(!o.tm)o.tm=now();chatMsgs[chat].push(o);
+function addMsg(chat,o){seen++;if(!o.tm)o.tm=now();o._chat=chat;if(!o._id)o._id=++MSGID;chatMsgs[chat].push(o);
   if(chat===active){const s=atBottom();feed.appendChild(makeNode(o));if(s)feed.scrollTop=feed.scrollHeight;}
   else{unread[chat]++;updateBackBadge();}}
 
@@ -969,8 +1003,28 @@ function notify(o){buzz();
   n.addEventListener('click',()=>{if(o.chat)setActive(o.chat);n.remove();});
   toast.appendChild(n);setTimeout(()=>n.remove(),8000);}
 
-function flicker(){const w=pick(sanaGone?NAMES.filter(n=>n!=='Sana'):NAMES);typingEl.textContent=w+" is typing…";
-  setTimeout(()=>{if(typingEl.textContent.startsWith(w))typingEl.textContent='';},500+Math.random()*800);}
+function flicker(){if(Date.now()<typeLock)return; // a named pre-beat typer owns the line
+  const w=pick(sanaGone?NAMES.filter(n=>n!=='Sana'):NAMES);typingEl.textContent=w+" is typing…";
+  setTimeout(()=>{if(Date.now()<typeLock)return;if(typingEl.textContent.startsWith(w))typingEl.textContent='';},500+Math.random()*800);}
+/* named typing, shown just before a seeded quoted reply lands */
+function showTyping(who,ms){const s=who+" is typing…";typingEl.textContent=s;typeLock=Date.now()+ms;
+  setTimeout(()=>{if(typingEl.textContent===s)typingEl.textContent='';},ms);}
+/* someone occasionally reacts to a message the player sent. purely social:
+   speaker and line are picked at random and never look at the answer or its
+   grading — an ack never confirms, denies or hints at anything. */
+const ACKS=[{who:"Kai",t:"who's this guy 💀"},{who:"Ollie",t:"^^ bold claim"},{who:"Jess",t:"omg agreed"},
+ {who:"Bea",t:"source?"},{who:"Maya",t:"screenshotting this"},{who:"Amara",t:"noted."},{who:"Ash",t:"wait what does that mean"}];
+function maybeAck(chat,text){
+  if(!roundActive||roundIdx<0||ackCount>=2)return;
+  if(Math.random()>=0.30)return;
+  ackCount++;
+  const a=pick(ACKS.filter(x=>!(sanaGone&&x.who==='Sana')));
+  roundTimers.push(setTimeout(()=>{
+    if(!roundActive)return;
+    if(document.getElementById('roundscreen').style.display==='flex')return;
+    addMsg(chat,{who:a.who,t:a.t,replyTo:String(text).slice(0,60)});
+  },4000+Math.random()*5000));
+}
 
 /* ---- rounds: no visible countdown; facilitator-gated between rounds ---- */
 function beginRound(i){
@@ -981,7 +1035,7 @@ function beginRound(i){
     Object.keys(CHATS).forEach(c=>{chatMsgs[c]=[];unread[c]=0;});
     cursors=[];toast.innerHTML='';updateBackBadge();
   }
-  closeArticle();closeInfo();closeList();
+  ackCount=0;closeArticle();closeInfo();closeList();
   const mi0=missionEl.querySelector('input');if(mi0)mi0.remove();missionEl.querySelector('.q').style.display='';
   ROUND_POOLS[i].forEach(t=>usedThreads.delete(t)); // this round's own theme always plays fresh
   if(i>0)feed.innerHTML='';feed.style.filter='';
@@ -996,16 +1050,23 @@ function beginRound(i){
   if(i===3)pushThreadNow(RUMOUR[1]);
   const D=scale(r.durationSec)*1000;
   const beat=(fn,d)=>{const b={done:false,fn:()=>{if(b.done)return;b.done=true;fn();}};b.id=setTimeout(b.fn,d);roundBeats.push(b);};
+  // ~2s before a seeded quoted reply lands, show that person typing — but only
+  // if you're actually looking at that chat. Sana never types once she's gone.
+  const TYPELEAD=2000;
+  const preType=(c,d)=>{if(!c.replyTo)return;beat(()=>{
+    if(!roundActive||c.chat!==active)return;
+    if(sanaGone&&c.who==='Sana')return;
+    showTyping(c.who,TYPELEAD);},Math.max(0,d-TYPELEAD));};
   // R5: the spain debunk lands AFTER jess's cousin claim (seed 0.4), not at round start
   if(i===4)beat(()=>pushThreadNow(RUMOUR[2],true),D*0.48);
-  r.claims.forEach(c=>{const d=D*(c.seed!==undefined?c.seed:(0.12+Math.random()*0.6));beat(()=>{
-    addMsg(c.chat,{who:c.who,t:c.t,claimId:c.claimId,link:c.link});
+  r.claims.forEach(c=>{const d=D*(c.seed!==undefined?c.seed:(0.12+Math.random()*0.6));preType(c,d);beat(()=>{
+    addMsg(c.chat,{who:c.who,t:c.t,claimId:c.claimId,link:c.link,replyTo:c.replyTo,reacts:c.reacts});
     if(c.chat!==active&&roundActive)notify({ic:CHATS[c.chat].emoji,t:CHATS[c.chat].name,b:c.who+': '+c.t.slice(0,34)+'…',chat:c.chat});},d);});
-  (r.chatter||[]).forEach(c=>{const d=D*(c.seed!==undefined?c.seed:(0.1+Math.random()*0.75));beat(()=>{
-    addMsg(c.chat,{who:c.who,t:c.t,link:c.link,tag:c.tag});
+  (r.chatter||[]).forEach(c=>{const d=D*(c.seed!==undefined?c.seed:(0.1+Math.random()*0.75));preType(c,d);beat(()=>{
+    addMsg(c.chat,{who:c.who,t:c.t,link:c.link,tag:c.tag,replyTo:c.replyTo,reacts:c.reacts});
     if(c.chat!==active&&roundActive&&Math.random()<.7)notify({ic:CHATS[c.chat].emoji,t:CHATS[c.chat].name,b:c.who+': '+c.t.slice(0,34)+'…',chat:c.chat});},d);});
   if(r.hint){const hn=r.hint;beat(()=>{
-    addMsg(hn.chat,{who:hn.who,t:hn.t});
+    addMsg(hn.chat,{who:hn.who,t:hn.t,replyTo:hn.replyTo,reacts:hn.reacts});
     if(roundActive)notify({ic:CHATS[hn.chat].emoji,t:CHATS[hn.chat].name,b:hn.who+': '+hn.t.slice(0,34)+'…',chat:hn.chat});},D*(hn.seed!==undefined?hn.seed:0.45+Math.random()*0.3));}
   (STORY[i]||[]).forEach(sb=>{beat(()=>{
     if(sb.sys){addMsg(sb.chat,{sys:true,t:sb.t});if(sb.t.includes("Sana left"))sanaGone=true;}
@@ -1147,6 +1208,7 @@ function sendOwn(){
   const c=document.getElementById('composer');const t=c.value.trim();if(!t)return;
   c.value='';addMsg(active,{me:true,t});
   if(roundActive&&roundIdx>=0&&roundIdx<=6)ANSWERS[roundIdx]=t;
+  maybeAck(active,t);
   buzz();
 }
 document.getElementById('sendbtn').addEventListener('click',sendOwn);
