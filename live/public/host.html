@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b141a">
+<title>Nothing Sticks · host</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#0b141a;color:#e9edef;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.45}
+#wrap{max-width:640px;margin:0 auto;padding:12px 12px 60px}
+h1{font-size:17px;margin:0;font-weight:600;letter-spacing:.2px}
+.top{display:flex;align-items:center;gap:8px;padding:10px 12px;margin:-12px -12px 12px;
+  background:#1f2c33;border-bottom:1px solid #101b21;position:sticky;top:0;z-index:5}
+.ava{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:17px;
+  background:linear-gradient(135deg,#6a3093,#a044ff);flex:none}
+.sub{font-size:11.5px;color:#8696a0}
+.card{background:#111b21;border:1px solid #22323a;border-radius:12px;padding:12px;margin-bottom:10px}
+.lbl{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#8696a0;margin-bottom:7px}
+.phase{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.big{font-size:24px;font-weight:700;color:#a7ffeb}
+.pill{font-size:11px;padding:3px 9px;border-radius:999px;background:#22323a;color:#cbd5d1}
+.pill.live{background:#0b5c3a;color:#a7ffeb}
+.pill.over{background:#5c4a0b;color:#ffe08a}
+.pill.end{background:#5c1b1b;color:#ffb4b4}
+.bar{height:8px;border-radius:6px;background:#22323a;overflow:hidden;margin-top:10px}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,#00a884,#a7ffeb);width:0;transition:width .5s linear}
+.mission{font-size:13.5px;color:#9fb0b6;margin-top:8px;font-style:italic}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+button{font:inherit;color:#e9edef;background:#22323a;border:1px solid #2c3e47;border-radius:10px;
+  padding:11px 8px;cursor:pointer;touch-action:manipulation}
+button:active{transform:scale(.97)}
+button:disabled{opacity:.4}
+button.go{background:#00a884;border-color:#00a884;color:#04231b;font-weight:700}
+button.warn{background:#4a1f1f;border-color:#6b2a2a;color:#ffb4b4}
+button.wide{width:100%;margin-top:8px}
+button.sel{background:#0b5c3a;border-color:#a7ffeb;color:#a7ffeb}
+.row2{display:flex;gap:7px}
+.row2>*{flex:1}
+.names{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;padding:6px 10px;border-radius:999px;background:#22323a;border:1px solid #2c3e47;cursor:pointer}
+.chip.prize{background:#5c4a0b;border-color:#ffe08a;color:#ffe08a}
+.tally{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #1b272e;font-size:14px}
+.tally:last-child{border-bottom:0}
+.cnt{flex:none;min-width:26px;height:26px;border-radius:8px;background:#22323a;display:grid;place-items:center;font-size:12px;font-weight:700}
+.tx{flex:1;word-break:break-word}
+.who{font-size:11px;color:#66757d}
+.ok{color:#a7ffeb}.no{color:#ff8a80}
+.lbrow{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid #1b272e}
+.lbrow:last-child{border-bottom:0}
+.rank{width:24px;text-align:center;font-size:14px;color:#8696a0;flex:none}
+.sc{font-weight:700;color:#a7ffeb;flex:none}
+.marks{font-size:11px;letter-spacing:2px;color:#66757d}
+input{font:inherit;width:100%;background:#0b141a;border:1px solid #2c3e47;color:#e9edef;
+  border-radius:10px;padding:11px;outline:none}
+.err{border-color:#ff8a80}
+.muted{color:#66757d;font-size:12px}
+#gate{position:fixed;inset:0;background:#0b141a;display:grid;place-items:center;padding:20px;z-index:20}
+#gate .card{max-width:340px;width:100%}
+.dot{width:7px;height:7px;border-radius:50%;background:#00e08a;display:inline-block;margin-right:5px;
+  animation:p 1.6s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.25}}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div class="card">
+    <div class="lbl">host console</div>
+    <h1 style="margin-bottom:10px">Nothing Sticks</h1>
+    <input id="key" type="password" placeholder="host key" autocomplete="off">
+    <div class="muted" id="gatehint" style="margin-top:7px">stored for this browser tab only</div>
+    <button class="go wide" id="gatebtn">unlock</button>
+  </div>
+</div>
+
+<div id="wrap" style="display:none">
+  <div class="top">
+    <div class="ava">🌀</div>
+    <div style="flex:1"><h1>host console</h1><div class="sub" id="sessname">session: main</div></div>
+    <div class="pill" id="conn">…</div>
+  </div>
+
+  <div class="card">
+    <div class="phase">
+      <span class="big" id="roundlbl">—</span>
+      <span class="pill" id="phaselbl">lobby</span>
+      <span class="pill" id="timelbl">0:00 / 0:00</span>
+      <span class="pill" id="pacelbl">pace 1×</span>
+    </div>
+    <div class="bar"><i id="barfill"></i></div>
+    <div class="mission" id="missionlbl">no round running</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">rounds</div>
+    <div class="grid" id="rbtns"></div>
+    <div class="row2" style="margin-top:8px">
+      <button id="endbtn">end round</button>
+      <button id="endgamebtn">end game</button>
+    </div>
+    <div class="lbl" style="margin-top:14px">pace</div>
+    <div class="row2">
+      <button class="pacebtn" data-p="0.75">0.75×</button>
+      <button class="pacebtn" data-p="1">1×</button>
+      <button class="pacebtn" data-p="1.25">1.25×</button>
+    </div>
+    <button class="warn wide" id="resetbtn">reset session</button>
+  </div>
+
+  <div class="card">
+    <div class="lbl">players <span id="pcount" class="muted"></span> · tap a name to mark the flake 99 prize</div>
+    <div class="names" id="names"><span class="muted">nobody yet</span></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">answers this round <span class="muted" id="tallyround"></span></div>
+    <div id="tally"><span class="muted">no answers yet</span></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">leaderboard</div>
+    <div id="lb"><span class="muted">no scores yet</span></div>
+  </div>
+</div>
+
+<script>
+const SESSION=new URLSearchParams(location.search).get('session')||'main';
+const MISSIONS=[
+ "R1 · what time does Dan's party actually start?",
+ "R2 · the code word to get in the door",
+ "R3 · what NUMBER Elm Road?",
+ "R4 · whose house is it?",
+ "R5 · did something actually happen at the station?",
+ "R6 · prove the time from the ORIGINAL source",
+ "R7 · is the party still ON?"];
+let KEY=sessionStorage.getItem('ns_hostkey')||'';
+let D=null,timerH=null;
+
+const $=id=>document.getElementById(id);
+const api=p=>p+(p.includes('?')?'&':'?')+'session='+encodeURIComponent(SESSION);
+async function host(path,body){
+  const r=await fetch(api('/api/host/'+path),{
+    method:body?'POST':'GET',
+    headers:{'X-Host-Key':KEY,'content-type':'application/json'},
+    body:body?JSON.stringify(body):undefined,cache:'no-store'});
+  if(r.status===401)throw new Error('401');
+  return r.json();
+}
+
+/* ---- gate ---- */
+function unlock(){
+  const k=$('key').value.trim();
+  if(!k)return;
+  KEY=k;
+  host('dashboard').then(d=>{
+    sessionStorage.setItem('ns_hostkey',KEY);
+    $('gate').style.display='none';$('wrap').style.display='';
+    $('sessname').textContent='session: '+SESSION;
+    render(d);start();
+  }).catch(()=>{
+    $('key').classList.add('err');$('gatehint').textContent='wrong host key';
+  });
+}
+$('gatebtn').onclick=unlock;
+$('key').addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
+
+/* ---- round buttons ---- */
+for(let i=0;i<7;i++){
+  const b=document.createElement('button');
+  b.textContent='R'+(i+1);b.dataset.r=i;
+  b.onclick=()=>host('start-round',{round:i}).then(refresh);
+  $('rbtns').appendChild(b);
+}
+$('endbtn').onclick=()=>host('end-round',{}).then(refresh);
+$('endgamebtn').onclick=()=>{if(confirm('End the game for everyone?'))host('end-game',{}).then(refresh);};
+$('resetbtn').onclick=()=>{if(confirm('Reset the whole session? Players will reload and all answers are wiped.'))host('reset',{}).then(refresh);};
+document.querySelectorAll('.pacebtn').forEach(b=>{
+  b.onclick=()=>host('set-pace',{pace:Number(b.dataset.p)}).then(refresh);
+});
+
+/* ---- polling ---- */
+async function refresh(){
+  try{D=await host('dashboard');$('conn').textContent='live';$('conn').className='pill live';render(D);}
+  catch(e){$('conn').textContent='offline';$('conn').className='pill end';}
+}
+function start(){refresh();setInterval(refresh,2000);if(!timerH)timerH=setInterval(tick,500);}
+
+function fmt(s){s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+function tick(){
+  if(!D||D.phase!=='round')return;
+  const el=(Date.now()-(D.roundStartedAt||0)+ (D.skew||0))/1000;
+  $('timelbl').textContent=fmt(el)+' / '+fmt(D.durationSec);
+  $('barfill').style.width=Math.min(100,el/D.durationSec*100)+'%';
+}
+
+function render(d){
+  D=d;D.skew=d.serverNow-Date.now();
+  const ph=d.phase;
+  $('phaselbl').textContent=ph;
+  $('phaselbl').className='pill '+(ph==='round'?'live':ph==='roundover'?'over':ph==='ended'?'end':'');
+  $('roundlbl').textContent=(ph==='lobby')?'lobby':(ph==='ended'?'done':'round '+(d.round+1));
+  $('pacelbl').textContent='pace '+d.pace+'×';
+  document.querySelectorAll('.pacebtn').forEach(b=>b.classList.toggle('sel',Number(b.dataset.p)===d.pace));
+  document.querySelectorAll('#rbtns button').forEach(b=>{
+    const i=Number(b.dataset.r);
+    b.className=(ph!=='round'&&i===(ph==='lobby'?0:d.round+1))||(ph==='roundover'&&i===d.round+1)?'go':(ph==='round'&&i===d.round?'sel':'');
+  });
+  $('missionlbl').textContent=(ph==='lobby')?'lobby · warm-up flood is running on every phone':
+    (ph==='ended'?'game over · end screens are up':MISSIONS[d.round]);
+  if(ph!=='round'){$('timelbl').textContent=fmt(0)+' / '+fmt(d.durationSec);$('barfill').style.width=ph==='lobby'?'0%':'100%';}
+  else tick();
+
+  // players
+  $('pcount').textContent='('+d.playerCount+')';
+  const N=$('names');N.innerHTML='';
+  if(!d.players.length)N.innerHTML='<span class="muted">nobody yet</span>';
+  d.players.forEach(p=>{
+    const c=document.createElement('span');
+    c.className='chip'+(d.prizeClaimedBy===p.name?' prize':'');
+    c.textContent=(d.prizeClaimedBy===p.name?'🍦 ':'')+p.name;
+    c.onclick=()=>host('prize-claimed',{name:d.prizeClaimedBy===p.name?null:p.name}).then(refresh);
+    N.appendChild(c);
+  });
+
+  // tally for the round being played (or the one just ended)
+  const r=(ph==='lobby')?0:d.round;
+  $('tallyround').textContent='· round '+(r+1);
+  const T=$('tally');T.innerHTML='';
+  const rows=d.tallies[r]||[];
+  if(!rows.length)T.innerHTML='<span class="muted">no answers yet</span>';
+  rows.forEach(t=>{
+    const el=document.createElement('div');el.className='tally';
+    el.innerHTML='<div class="cnt">'+t.count+'</div>'+
+      '<div class="tx">'+esc(t.text)+'<div class="who">'+esc(t.who.join(', '))+'</div></div>'+
+      '<div class="'+(t.correct?'ok':'no')+'">'+(t.correct?'✓':'✗')+'</div>';
+    T.appendChild(el);
+  });
+
+  // leaderboard
+  const L=$('lb');L.innerHTML='';
+  const med=['🥇','🥈','🥉'];
+  if(!d.players.length)L.innerHTML='<span class="muted">no scores yet</span>';
+  d.players.forEach((p,i)=>{
+    const el=document.createElement('div');el.className='lbrow';
+    el.innerHTML='<div class="rank">'+(med[i]||(i+1))+'</div>'+
+      '<div style="flex:1">'+esc(p.name)+'<div class="marks">'+p.graded.map(g=>g?'✓':'✗').join(' ')+'</div></div>'+
+      '<div class="sc">'+p.score+'/7</div>';
+    L.appendChild(el);
+  });
+}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+if(KEY){$('key').value=KEY;unlock();}
+</script>
+</body>
+</html>

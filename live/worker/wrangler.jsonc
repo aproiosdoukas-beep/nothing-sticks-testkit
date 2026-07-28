@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nothing-sticks-live",
+  "main": "src/index.js",
+  "compatibility_date": "2025-06-01",
+  "assets": {
+    "directory": "../public",
+    "binding": "ASSETS",
+    // serve /game.html and /host.html verbatim so ?session= survives (no
+    // pretty-URL redirect that would drop the query string)
+    "html_handling": "none",
+    "not_found_handling": "none"
+  },
+  "vars": {
+    // CHANGE THIS before running a real session, or set it as a secret:
+    //   npx wrangler secret put HOST_KEY
+    "HOST_KEY": "changeme-nothing-sticks"
+  },
+  "durable_objects": {
+    "bindings": [
+      { "name": "SESSION", "class_name": "Session" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["Session"] }
+  ],
+  "observability": { "enabled": true }
+}
